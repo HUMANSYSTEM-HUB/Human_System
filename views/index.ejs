@@ -1,0 +1,635 @@
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" href="https://i.ibb.co/PTcH9jG/Imagen1.png">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+      <!-- CSS propio -->
+      <link rel="stylesheet" href="public\css\style.css">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-GhQgjsNhpBS0CjvIvH7V+j+nNM0pz0f9+0JxCuTH2Q/2+WdQQQVnWkc/CMvYV7gG" crossorigin="anonymous">
+      <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+      <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+      <script>
+        const curpInput = document.getElementById("rfc");
+        const curpQR = new QRCode(document.getElementById("rfc_qr"), {
+          text: curpInput.value,
+          width: 128,
+          height: 128,
+          correctLevel: QRCode.CorrectLevel.H,
+        });
+        curpInput.addEventListener("input", () => {
+          curpQR.clear();
+          curpQR.makeCode(curpInput.value);
+        });
+      </script>
+      <title>Inicio</title>
+  </head>
+    <body class="text-center">  
+      
+<!-- Titulo -->
+<div class="pt-2 pb-2 text-center" style="background-color: white" >
+<img class="" src="https://i.ibb.co/TLtfZJm/Captura-de-pantalla-2023-04-28-084724.png" style="max-width:100%;width:auto;height: 70px;;">		
+</div>
+
+<!-- Nav -->
+<div id="Navbar" class="text-center sticky-top pl-2 pr-2" style="background-color: white;">
+  <nav class="navbar navbar-expand-lg sticky-top rounded-lg" style="background-color: whitesmoke;">
+    <img class="align-items-center background-color:white rounded-lg" src="https://i.ibb.co/f4vZNKd/Captura-de-pantalla-2023-04-29-201016.png"  width="60" height="60" alt="Logo">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto align-items-center">
+      <li class="nav-item">
+        <a a class="nav-link" href="#" style="color: #2c758c; font-size: 25px;"><i class="fas fa-file-media"></i></a>
+      </li>
+      <li class="nav-item" onclick="window.print()">
+        <a a class="nav-link" style="color: #2c758c; font-size: 25px;" href="# "><span class="fa fa-user"></span></a>
+      </li>
+      <li class="nav-item" onclick="window.print()">
+        <a a class="nav-link" style="color: #2c758c; font-size: 25px;" href="#"><i class="fas fa-envelope"></i></a>
+      </li>
+      <li class="nav-item" onclick="window.print()">
+        <a a class="nav-link" style="color: #2c758c; font-size: 25px;" href="#"><i class="fas fa-dollar-sign"></i></a>
+      </li>
+      <li class="nav-item" onclick="window.print()">
+        <a a class="nav-link" style="color: #2c758c; font-size: 25px;" href="#"><i class="fas fa-calendar-alt"></i></a>
+      </li>
+      <li class="nav-item">
+        <a a class="nav-link" href="#" style="color: #2c758c; font-size: 21px;"><i class="fas fa-folder fa-lg"></i></a>
+      </li>
+      <li class="nav-item">
+        <a a class="nav-link" href="#" style="color: #2c758c; font-size: 15px;"><i class="fas fa-info fa-lg"></i></a>
+      </li>
+      <li class="nav-item">
+        <a a class="nav-link" href="logout" style="color: #2c758c; font-size: 25px;"><i class="fas fa-sign-out-alt"></i></a>
+      </li>
+    </ul>
+  </div>
+  </nav>
+</div>
+
+<div id="conoceme" class="text-center p-3" style="background-color: white;">
+	<div class="p-3 text-white rounded-lg" style="background-color: #9fc1cb">
+    <div class="row">
+      <div class="col-md-3 align-self-center">
+        <div class="col mb-3 p-3 col-md text-white rounded-lg"  style="background-color: white">
+          <img class="mt-1 rounded-lg" src="https://i.ibb.co/Nxkbn3C/Dise-o-sin-t-tulo-3.png"  width="110" height="110" alt="Logo">
+          <% if (login) { %>
+          <div class="" ALIGN="left" ><h4 style="color:#15566a">Nombre:</h4>
+            <P style="color:#f87d6a"><%= nombre %></P>
+            <div><h6 style="color:#15566a">CURP:</h6><p style="color:#f87d6a"><%= curp %></p></div>
+            <div><h6 style="color:#15566a">ID:</h6><p style="color:#f87d6a"><%= tarjeta_chip %></p></div>
+        </div>
+          <div class="col col-md pt-3 text-white p-1 rounded-lg" style="background-color: whitesmoke" >
+          <div class="ml-2" ALIGN="left">           
+              <div><h6 style="color:#15566a">Descripción:</h6><p style="color:#f87d6a">Estudiante apasionado por la politica</p></div>
+                      </div> 
+                        </form>
+                        <div class="mb-3">
+<!-- Botón de Usuario -->
+<a href="#" target="_blank" style="color: #2c758c; font-size: 21px;"rel="noopener noreferrer"><i class="mr-2 fas fa-user"></i></a>
+
+<!-- Botón de Empleo -->
+<a href="#" target="_blank" style="color: #2c758c; font-size: 21px;" rel="noopener noreferrer"><i class="mr-2 fas fa-briefcase"></i></a>
+
+
+                        <!-- Botón de Instagram -->
+<a href="https://www.instagram.com/" style="color: #2c758c; font-size: 21px;" target="_blank" rel="noopener noreferrer"><i class="mr-2 fab fa-instagram"></i></a>
+
+<!-- Botón de Facebook -->
+<a href="https://www.facebook.com/"style="color: #2c758c; font-size: 21px;" target="_blank" rel="noopener noreferrer"><i class="mr-2 fab fa-facebook"></i></a>
+
+<!-- Botón de Youtube -->
+<a href="https://www.youtube.com/"style="color: #2c758c; font-size: 21px;" target="_blank" rel="noopener noreferrer"><i class="mr-2 fab fa-youtube"></i></a>
+
+<!-- Botón de LinkedIn -->
+<a href="https://www.linkedin.com/" style="color: #2c758c; font-size: 21px;"target="_blank" rel="noopener noreferrer"><i class="mr-2 fab fa-linkedin"></i></a>
+
+<a href="https://www.twitter.com/" style="color: #2c758c; font-size: 21px;"><i class="mr-2 fab fa-twitter"></i></a>
+<a href="https://www.tiktok.com/" style="color: #2c758c; font-size: 21px;"><i class=" fab fa-tiktok"></i></a>
+
+
+</div>
+              </div>
+              <button type="submit" class="mt-3 btn btn-danger"><i class="fas fa-qrcode"></i> QR</button>
+            </button>
+            <% } %>
+            </div>
+
+            
+                <div class="col col-md text-white p-2 rounded-lg" style="background-color: #ffffff54"">
+                    <h4 class="mt-2" style="color:#0463cb;"> Mensajes <i class="ml-1 fa fa-envelope"></i></h4>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="list-group" id="lista-conversaciones" role="tablist">
+                          <a class="list-group-item list-group-item-action active btn-primary" data-toggle="list" href="#conversacion1" role="tab">Claudia</a>
+                          <a class="list-group-item list-group-item-action btn-primary" data-toggle="list" href="#conversacion2" role="tab">Marcelo</a>
+                          <a class="list-group-item list-group-item-action btn-primary" data-toggle="list" href="#conversacion3" role="tab">Adan</a>
+                        </div>
+                      </div>
+                      <div class="col-md-8 mt-3">
+                        <div class="tab-content" id="contenido-conversaciones">
+                          <div class="tab-pane fade show active" id="conversacion1" role="tabpanel">
+                            <div class="chat-container">
+                              <div class="chat-message">
+                                <div class="chat-message-content" style="color:#0463cb;">
+                                  Claudia: Hola, ¿cómo estás? 
+                                </div>
+                                <div class="chat-message-time"  style="color: #0463cb;">
+                                 24/04/23 - 10:00 AM
+                                </div>
+                              </div>
+                              <div class="chat-message">
+                                <div class="chat-message-content"  style="color:#0463cb;">
+                                 Yo: Estoy bien, gracias por preguntar. ¿Y tú?
+                                </div>
+                                <div class="chat-message-time"style="color:#0463cb;">
+                                  24/04/23 - 10:05 AM
+                                </div>
+                              </div>
+                            </div>
+                            <form action="#" method="POST" class="chat-form">
+                              <div class="input-group mt-2">
+                                <input type="text" class="form-control" placeholder="Escribe...">
+                                <div class="input-group-append">
+                                  <button class="btn btn-primary" type="submit"><i class="mr-2 fas fa-paper-plane"></i>Enviar</button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="tab-pane fade" id="conversacion2" role="tabpanel">
+                            <div class="chat-container">
+                              <div class="chat-message">
+                                <div class="chat-message-content " style="color:#0463cb;">
+                                 Marcelo:
+                                ¿Qué planes tienes para hoy?
+                                </div>
+                                <div class="chat-message-time"  style="color:#0463cb;">
+ 12/02/30 - 5:43 PM
+  </div>
+  </div>
+  <div class="chat-message">
+  <div class="chat-message-content"  style="color:#0463cb;">
+Yo: Nada en particular, ¿tú?
+  </div>
+  <div class="chat-message-time" style="color:#0463cb;">
+    12/02/30 - 5:50 PM
+  </div>
+  </div>
+  </div>
+  <form action="#" method="POST" class="chat-form">
+  <div class="input-group mt-2">
+  <input type="text" class="form-control" placeholder="Escribe...">
+  <div class="input-group-append">
+  <button class="btn btn-primary" type="submit"><i class="mr-2 fas fa-paper-plane"></i>Enviar</button>
+  </div>
+  </div>
+  </form>
+  </div>
+  <div class="tab-pane fade" id="conversacion3" role="tabpanel">
+  <div class="chat-container">
+  <div class="chat-message">
+  <div class="chat-message-content" style="color:#0463cb;">
+  Adan: ¿Qué opinas de la película que vimos ayer?
+  </div>
+  <div class="chat-message-time" style="color:#0463cb;">
+  05/01/23 - 8:13 PM
+  </div>
+  </div>
+  <div class="chat-message">
+  <div class="chat-message-content" style="color:#0463cb;">
+  Yo: Me gustó bastante, ¿a ti?
+  </div>
+  <div class="chat-message-time" style="color:#0463cb;">
+    05/01/23 - 8:52 PM
+  </div>
+  </div>
+  </div>
+  <form action="#" method="POST" class="chat-form">
+  <div class="input-group mt-2">
+  <input type="text" class="form-control" placeholder="Escribe...">
+  <div class="input-group-append">
+  <button class="btn btn-primary" type="submit"><i class="mr-2 fas fa-paper-plane"></i>Enviar</button>
+  </div>
+  </form>
+  </div>
+  
+  </div>  
+</div>
+  </div>
+  </div>
+  </div>
+  <div class="col col-md mt-3 mb-3 text-white p-2 rounded-lg " style="background-color: #f87d6a">
+    <div class="form-group">
+    <div class="container mt-2">
+      <h4>Pagos en línea</h4>
+      <form action="process_online_payment" method="POST">
+        <div class="form-group">
+          <label for="amount">Monto</label>
+          <i class="mr-3 mt-3 fas fa-coins"></i>
+          <div class="input-group">
+           
+            <input type="number" class="form-control" id="amount" name="amount" step="0.01" min="0" required placeholder="$ 1,280.50">
+          </div>
+        </div>
+        <div class="form-group">
+          <i class="mt-1 fas fa-building"></i>
+          <label for="amount">Origen</label>
+          <select class="form-control" id="conversaciones" name="conversaciones">
+            <option value="RFC YO">CAMS000409XX1 </option>
+            <option value="marcelo">HUMS000409KE4</option>
+            <option value="adan">ELIXIR00409MP3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <i class="fas fa-user"></i>
+          <label for="recipient_account">Destino</label>
+          <input type="text" class="form-control" id="recipient_account" name="recipient_account" required>
+        </div>
+        <button type="submit" class="btn btn-warning"><i class="fas fa-credit-card mr-2"></i>Realizar pago</button>
+      </form>
+    </div>   
+    <div class=" mt-3 p-2 rounded-lg" style="background-color: #ffffff54">
+      <div class="list-group" id="lista-conversaciones" role="tablist">
+        <a class="list-group-item list-group-item-action active btn-outline-warning" data-toggle="list" href="#ticket1" role="tab">Pago 1</a>
+        <a class="list-group-item list-group-item-action btn-outline-warning" data-toggle="list" href="#ticket2" role="">Pago 2</a>
+        <a class="list-group-item list-group-item-action btn-outline-warning" data-toggle="list" href="#ticket3" role="">Pago 3 </a>
+      </div>
+      <div class="mb-1 mt-3">
+        <div class="tab-content" id="contenido-conversaciones">
+          <div class="tab-pane fade show active" id="ticket1" role="tabpanel">
+            <div class="chat-container">
+              <div class="chat-message">
+                <div class="chat-message-content" style="color:black;">
+                  Cuenta de origen: 123456789<br>
+                  Cuenta de destino: 987654321<br>
+                  Monto: $100<br>
+                  Fecha: 27 de abril de 2023
+                </div>
+                <div class="chat-message-time"  style="color:black;">
+                 Hora: 10:00 AM
+                </div>
+              </div>
+              <div class="chat-message">
+                <div class="chat-message-content"  style="color:black;">
+                 Descripción: Agua
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="ticket2" role="tabpanel">
+            <div class="chat-container">
+              <div class="chat-message">
+                <div class="chat-message-content" style="color:black;">
+                  Cuenta de origen: 987654321<br>
+                  Cuenta de destino: 123456789<br>
+                  Monto: $50<br>
+                  Fecha: 27 de abril de 2023
+                </div>
+                <div class="chat-message-time" style="color:black;">
+                  2:00 PM
+                </div>
+              </div>
+              <div class="chat-message">
+                <div class="chat-message-content" style="color:black;">
+                  Se ha recibido su pago correctamente.
+                </div>
+                <div class="chat-message-time" style="color:black;">
+                  2:05 PM
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="ticket3" role="tabpanel">
+            <div class="chat-container">
+              <div class="chat-message">
+                <div class="chat-message-content"style="color: black;">
+                  Cuenta de origen: 111111111<br>
+                  Cuenta de destino: 222222222<br>
+                  Monto: $200<br>
+                  Fecha: 27 de abril de 2023
+                </div>
+                <div class="chat-message-time" style="color: black;">
+                  8:00 PM
+                </div>
+              </div>
+              <div class="chat-message">
+                <div class="chat-message-content" style="color:black;">
+                  Su pago ha sido acreditado en la cuenta destino.
+                </div>
+                <div class="chat-message-time" style="color:black;">
+                  8:05 PM
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+      
+  </div>     
+
+        </div>
+            <div id="eventos" class="text-center rounded-lg" style="background-color: #15566a">
+              <div class="container mb-3 pb-1">
+                <div class="row">
+                  <div class="col-md-6 mt-3">
+                    <div class="text-white mt-3 p-2 rounded-lg" style="background-color: #ffffff54">
+                      <div class="list-group" id="lista-conversaciones" role="tablist">
+                        <h6>Próximos eventos</h5>
+                        <div class="list-group" id="lista-conversaciones" role="tablist">
+                          <a class="list-group-item list-group-item-action active btn-outline-info" data-toggle="list" href="" role="tab">Evento 1</a>
+                          <a class="list-group-item list-group-item-action btn-outline-info" data-toggle="list" href="" role="tab">Evento 2</a>
+                          <a class="list-group-item list-group-item-action btn-outline-info" data-toggle="list" href="" role="tab">Evento 3 </a>
+                          <a class="list-group-item list-group-item-action btn-outline-info" data-toggle="list" href="" role="tab">Evento 4</a>
+                          <a class="list-group-item list-group-item-action btn-outline-info" data-toggle="list" href="" role="tab">Evento 5</a>
+                        </div>
+                      </div>
+                    </div>
+                
+                  </div>
+                  <div class="col-md-6 mt-3">
+                    <form action="#" method="POST">
+                      <div class="form-group">
+                        <label for="nombreEvento">Nombre del evento:</label>
+                        <input type="text" class="form-control" id="nombreEvento" name="nombreEvento">
+                      </div>
+                      <div class="form-group">
+                        <label for="fechaEvento">Fecha del evento:</label>
+                        <input type="date" class="form-control" id="fechaEvento" name="fechaEvento">
+                      </div>
+                      <div class="form-group">
+                        <label for="horaEvento">Hora del evento:</label>
+                        <input type="time" class="form-control" id="horaEvento" name="horaEvento">
+                      </div>
+                      <button type="submit" class="btn btn-info"><i class="fas fa-calendar mr-2"></i> Crear evento</i></button>
+                      </form>
+                  </div>
+                </div>
+                
+                  <div class="text-center align-items-center m-3 p-2 rounded-lg" style="background-color: #ffffff54">
+                    <h4 class="mt-2">Calendario</h4>
+                   <div class="" ALIGN="middle">  <table class="table table-bordered" style="width:auto">
+                        <thead>
+                          <tr>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>M</th>
+                            <th>M</th>
+                            <th>J</th>
+                            <th>V</th>
+                            <th>S</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                          </tr>
+                          <!-- Resto del calendario -->
+                        </tbody>
+                      </table>
+                    </div>
+                    <button type="submit" class="ml-2 btn btn-info"><i class="mr-2 fas fa-file-alt"></i>Estado</button>
+                   
+                    </div>
+                  </div> 
+        </div>
+  </div>
+
+<div class="col-md-9">
+
+  <div class="col p-3 mb-3 col-md text-white rounded-lg" style="background-color: #2c758c;">
+    <div class="text-white p-2 rounded-lg" style="background-color: #ffffff54">
+    <div class="container text-center">
+        <div class="pb-3">
+            <form action="process_publicar_contenido" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" required>
+                </div>
+                <div class="form-group">
+                    <label for="texto">Texto</label>
+                    <textarea class="form-control" id="texto" name="texto" rows="3"></textarea>
+                </div>
+                    <label for="imagen" class="mt-2 mr-3"><i class="fas fa-image fa-lg text-white"></i></label>
+                    <input type="file" class="form-control-file d-none" id="imagen" name="imagen">
+                    <label for="video" class="mr-3"><i class="fas fa-video fa-lg text-white"></i></label>
+                    <input type="file" class="form-control-file d-none" id="video" name="video">
+                    <label for="archivo" class="mr-3"><i class="fas fa-file-alt fa-lg text-white"></i></label>
+                    <input type="file" class="form-control-file d-none" id="archivo" name="archivo">
+                    <label for="imagen"><i class="fas fa-grin fa-lg text-white"></i></label>
+                    <label for="imagen"><i class="fas fa-poll ml-3 fa-lg text-white"></i></label>
+                    <label for="imagen"><i class="fas fa-volume-up ml-3"></i></label>
+                    <label for="imagen"><i class="fas fa-dollar-sign ml-3"></i></label>
+                </div>
+                <button type="submit" class="btn btn-success"><i class="fas fa-upload mr-3"></i>Publicar</button>
+            </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col p-3 mt-2 col-md rounded-lg" style="background-color: #15566a">
+ 
+      <div class="col p-3 mb-3 col-md rounded-lg" style="background-color: whitesmoke">
+        <form action="#" method="GET" class="search-form">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar...">
+            <div class="input-group-append">
+              <button class="btn btn-info" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+                  <div class="card">
+                    <div class="card-body" style="background-color: white;">
+                      <div class="text-white pt-4 pr-4 pl-4 rounded-lg" ALIGN="left" style="background-color: whitesmoke">
+                        <h5 class="card-title" style="color: #15566a">Título de la publicación</h5>
+                        <p class="card-text" style="color: #15566a">Texto de la publicación</p>
+                        <small class="text-muted">Fecha de publicación</small>
+                        <br>
+                        <br>
+                        <div style="color: #15566a"><i class="far fa-heart"></i>  15.3K
+                          <i class="ml-2 far fa-comment"></i> 1.2M
+                          <i class="ml-1 fas fa-share"></i> 360
+                          <i class="ml-1 far fa-heart"></i> 1.5M</div>
+                        <img src="" class="img-fluid align-self-center">
+                      </div>
+                        <div class="d-flex justify-content-between mt-3">
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-danger"><i class="far fa-heart"></i> Me gusta</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-comment"></i> Comentar</button>
+                            <button type="button" class="btn btn-sm btn-outline-warning"><i class="fas fa-share"></i> Compartir</button>
+                            <button type="button" class="btn btn-outline-primary">
+                              <i class="fas fa-user-plus"></i> Seguir
+                            </button>
+                            <button type="button" class="btn btn-outline-success">
+                              <i class="fas fa-money-bill"></i> Comprar
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-dark"><i class="fas fa-exclamation-triangle"></i> Denunciar</button>
+                                                 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                         
+
+              
+          </div>
+
+          <div class="col p-3 mt-2 col-md rounded-lg" style="background-color: #0463cb;">
+               <div class="text-white p-3 rounded-lg" style="background-color: #ffffff54">
+              <div class="col p-3 mb-3 col-md rounded-lg" style="background-color: white">
+                <form action="#" method="GET" class="search-form">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Carpeta...">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="submit"><i class="fas fa-folder mr-2"></i>Carpeta</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              
+              
+      
+              <div class="row justify-content-center">
+                
+                <div class="col-sm-6 col-md-4 mt-1">
+                  
+                  <div class="card border-0 bg-white text-center p-4">
+                    <i class="fas fa-images fa-5x mb-4 text-primary"></i>
+                    <h5 class="card-title mb-3" style="color: #0463cb;">Imágenes</h5>
+                    <p class="card-text" style="color: #0463cb;">Ver todas las imágenes</p>
+                    <div class="list-group" id="lista-conversaciones" role="tablist">
+                      <a class="list-group-item list-group-item-action active btn-outline-primary" data-toggle="list" href="" role="tab"> <i class="fas fa-images"></i> Imagen 1</a>
+                      <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-images"></i> Imagen 2</a>
+                      <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-images"></i> Imagen 3</a>
+                      <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-images"></i> Imagen 4</a>
+      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4 mt-1">
+                  <div class="card border-0 bg-white text-center p-4">
+                    <i class="fas fa-video fa-5x mb-4 text-primary"></i>
+                    <h5 class="card-title mb-3" style="color: #0463cb;">Media</h5>
+                    <p class="card-text"style="color: #0463cb;" >Ver todos los audios y videos</p>
+                    <div class="list-group" id="lista-conversaciones" role="tablist">
+                      <a class="list-group-item list-group-item-action active btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-video"></i> Video 1</a>
+                      <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-video"></i> Video 2</a>
+                      <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-video"></i> Video 3</a>
+                      <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-video"></i> Audio 1</a>
+      
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4 mt-1">
+                  <div class="card border-0 bg-white text-center p-4">
+                    <i class="fas fa-file-alt fa-5x mb-4 text-primary"></i>
+                    <h5 class="card-title mb-3" style="color: #0463cb;">Documentos</h5>
+                    <p class="card-text"style="color: #0463cb;">Ver todos los documentos</p>
+                    <div class="list-group" id="lista-conversaciones" role="tablist">
+                      <a class="list-group-item list-group-item-action active btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-file-alt"></i> Power Point</a>
+                      <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-file-alt"></i> Word</a>
+                      <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-file-alt"></i> Excel</a>
+                      <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-file-alt"></i> PDF</a>
+      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+  
+                
+            <div class="text-white mt-3 p-3  rounded-lg" style="background-color: rgba(245, 245, 245, 0.313)">
+              <form action="verification" method="POST">
+              <div class="pb-2">
+                <h4 class="mb-2" style="color: black;">Validación digital</h4>
+              </div>
+            <h6 class="mb-4 fw-normal" style="color: black;">Ingresa el numero identificador:</h6>
+            <div class="mb-3 fw-normal">
+              
+            <input type="" name="tarjeta_chip" class="form-control" id="floatingInput" placeholder="XXXX-XXXX-XXXX-XXXX" length="16">
+            </div>
+            <button type="submit" class="btn btn-secondary"><i class=" fas fa-search mr-2"></i>Validar</button>
+           <button type="submit" class="ml-2 btn btn-dark"><i class="mr-2 fas fa-qrcode"></i>Escanear</button>
+           <button type="submit" class="ml-2 btn btn-warning"><i class=" fas fa-exclamation-triangle"></i></button>                    
+          </form>   
+          </div>
+           
+              </div>
+              </div>
+              
+
+  </div>    
+
+</div>
+  
+
+
+          <% if (typeof alert != "undefined")  { %>
+            <script>
+          Swal.fire({
+            title:'<%= alertTitle %>',
+            text:'<%= alertMessage %>',
+            icon:'<%= iconHtml %>',
+            showConfirmButton: <%= showConfirmButton %>,
+            timer: <%= timer %>
+          }).then(()=>{ 	
+            window.location='/<%= ruta %>'
+          })
+          </script>
+        <% } %>
+
+       
+  <!-- Pie de pagina -->
+
+  <div style="color: #2d7990 " class="" style="background-color: white;">
+    <a class="" href="#">
+      <img class="mt-1 mb-3" src="https://i.ibb.co/f4vZNKd/Captura-de-pantalla-2023-04-29-201016.png" width="80" height="80" alt="Logo">		
+      </a>
+    <p class="">Programador Sergio Campos Medina. <br> Registro de obra No.03-2022-050214132600-01<br>  &copy; 2022-2027</p>
+
+        <i class="fas fa-dna mb-3" style=" font-size: 20px;"></i>
+    </div>
+
+
+  <!-- Scripts --> 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <!-- Scrollreveal -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="assets/js/scrollReveal.js"></script>
+  <!-- Dependencias de bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+  crossorigin="anonymous"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  </body>
+  </html>

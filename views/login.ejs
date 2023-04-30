@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://i.ibb.co/PTcH9jG/Imagen1.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- CSS propio -->
+    <link rel="stylesheet" href="public\css\style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap" rel="stylesheet">
+    <title>Ingresa</title>
+</head>
+<body>
+
+<!-- Titulo --> 
+	<div class="pt-2 text-center" style="background-color: white" >
+		<a class="" href="#">
+		  <img class="" src="https://i.ibb.co/TLtfZJm/Captura-de-pantalla-2023-04-28-084724.png" style="max-width:100%;width:auto;height: 70px;;">		
+		  </a>
+	  </div>
+
+<!-- Nav --> 
+
+<nav class=" m-2 navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: whitesmoke;">
+	<a class="" href="#">
+	<img class="align-items-center rounded-lg"  src="https://i.ibb.co/f4vZNKd/Captura-de-pantalla-2023-04-29-201016.png"  width="60" height="60" alt="Logo">		
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+	aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+	<ul class="navbar-nav ml-auto align-items-center">
+	<li class="nav-item active">
+	<a class="nav-link" href="register" style="color: #2c758c; font-size: 20px;">Registrate<span class="sr-only">(current)</span></a>
+	</li>
+		<li class="nav-item">
+		<a a class="nav-link" href="#" style="color: #2c758c; font-size: 20px;">Ingresa</a>
+		</li>
+		</ul>
+	</nav>
+		</div>
+	
+<!-- Formulario Inicio de Sesion --> 
+
+<div id="Ingresa" class="text-center align-items-center" style="background-color: whites">
+	<div class="pt-4 pb-4 pr-4 pl-4 m-3 rounded-lg align-items-center " style="background-color:  #9fc1cb">
+	<div class="login-form align-items-center " >
+	<div class="register-form form pb-3 align-items-center" style="color:#15566a">
+		<img class="mb-2" src="https://cdn-icons-png.flaticon.com/512/2867/2867197.png" alt="" width="60" height="60">
+
+	</div>
+	<form action="auth" method="POST">
+
+			  <div class="text-white pt-4 pb-4 pr-5 pl-5 rounded-lg " style="background-color: whitesmoke">
+				<main class="form-signin w-100 m-auto" style="color: #2c758c;">
+					<form>
+					  <h6 class="mb-3 fw-normal">CURP:</h6>
+					  <div class="form-floating">
+						<input type="text" name="curp" style="color:#f87d6a" class="form-control" id="floatingInput" placeholder="CURP" minlength="18" maxlength="18">
+						<div class="form-floating mt-3">
+						<div class="m-3"><h6 for="floatingInput ">Contraseña:</h6></div>
+						<input type="password" name="contraseña" style="color:#f87d6a" class="form-control" id="floatingInput" minlength="8" maxlength="20" placeholder="*********">
+					</div>
+					</div>
+					<div class="checkbox m-3">
+						<label>
+						  <input type="checkbox" value="remember-me"> Recordarme
+						</label>
+					  </div>
+					  <button class="w-100 btn btn-info btn-success" type="submit" value="login">Ingresa</button>
+					</form>
+				  </main>
+				</form>
+					</div>
+
+</div>
+</div>
+
+
+<div style="color: #2d7990 " class="mt-" style="background-color: white;">
+	<a class="" href="#">
+	  <img class="" src="https://i.ibb.co/f4vZNKd/Captura-de-pantalla-2023-04-29-201016.png" width="80" height="80" alt="Logo">		
+	  </a>
+	<p class="m-0 pb-4"> Programador Sergio Campos Medina. <br> Registro de obra No.03-2022-050214132600-01<br>  &copy; 2022-2027</p>
+
+  </div>
+
+<!-- Scripts -->
+
+		  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		  <!-- Scrollreveal -->
+		  <script src="https://unpkg.com/scrollreveal"></script>
+		  <script src="assets/js/scrollReveal.js"></script>
+		  <!-- Dependencias de bootstrap -->
+		  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		  crossorigin="anonymous"></script>
+		  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+		  integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+		  crossorigin="anonymous"></script> 
+
+   <% if (typeof alert != "undefined")  { %>
+	    <script>
+    Swal.fire({
+      title:'<%= alertTitle %>',
+      text:'<%= alertMessage %>',
+      icon:'<%= alertIcon %>',
+      showConfirmButton: <%= showConfirmButton %>,
+      timer: <%= timer %>
+    }).then(()=>{ 	
+      window.location='/<%= ruta %>'
+    })
+    </script>
+  <% } %>
+	</div>
+	
+</body>
+</html>
