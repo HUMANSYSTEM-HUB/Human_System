@@ -11,8 +11,12 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './env/.env'});
 
 //4 -seteamos el directorio de assets
-app.use('/resources',express.static('public'));
-app.use('/resources', express.static(__dirname + '/public'));
+app.use('/public/css', express.static(__dirname + '/public/css', { 
+	setHeaders: (res, path) => {
+	  res.setHeader('Content-Type', 'text/css');
+	}
+  }));
+  
 
 //5 - Establecemos el motor de plantillas
 app.set('view engine','ejs');
@@ -224,6 +228,22 @@ app.get('/logout', function (req, res) {
 });
 
 
-app.listen(3006, (req, res)=>{
-    console.log('SERVER RUNNING IN http://localhost:3006');
+app.listen(3007, (req, res)=>{
+    console.log('SERVER RUNNING IN http://localhost:3007');
 });
+
+
+var payment = require('crypto-payment-url')
+var qr = require('crypto-payment-url/qrcode')
+
+// Generar URL de pago Ethereum para 1000 Wei y generar el código QR
+var ethereumPaymentUrl = payment.ethereum({ address: '0x06D7b160F31C8a017b28F5dfbD784d29c4b12A04', amount: 1000 });
+var ethereumPaymentQr = qr.ethereum({ address: '0x4ec8bb2d0bba6314c43dd41f5ae00e06dd8591e9', amount: 1000 });
+
+// Generar URL de pago Bitcoin y generar el código QR
+var bitcoinPaymentUrl = payment.bitcoin({ lightning: 'lnbc9678785340p1pwmna7lpp5gc3xfm08u9qy06djf8dfflhugl6p7lgza6dsjxq454gxhj9t7a0sd8dgfkx7cmtwd68yetpd5s9xar0wfjn5gpc8qhrsdfq24f5ggrxdaezqsnvda3kkum5wfjkzmfqf3jkgem9wgsyuctwdus9xgrcyqcjcgpzgfskx6eqf9hzqnteypzxz7fzypfhg6trddjhygrcyqezcgpzfysywmm5ypxxjemgw3hxjmn8yptk7untd9hxwg3q2d6xjcmtv4ezq7pqxgsxzmnyyqcjqmt0wfjjq6t5v4khxxqyjw5qcqp2rzjq0gxwkzc8w6323m55m4jyxcjwmy7stt9hwkwe2qxmy8zpsgg7jcuwz87fcqqeuqqqyqqqqlgqqqqn3qq9qn07ytgrxxzad9hc4xt3mawjjt8znfv8xzscs7007v9gh9j569lencxa8xeujzkxs0uamak9aln6ez02uunw6rd2ht2sqe4hz8thcdagpleym0j' });
+var bitcoinPaymentQr = qr.bitcoin({ lightning: 'lnbc9678785340p1pwmna7lpp5gc3xfm08u9qy06djf8dfflhugl6p7lgza6dsjxq454gxhj9t7a0sd8dgfkx7cmtwd68yetpd5s9xar0wfjn5gpc8qhrsdfq24f5ggrxdaezqsnvda3kkum5wfjkzmfqf3jkgem9wgsyuctwdus9xgrcyqcjcgpzgfskx6eqf9hzqnteypzxz7fzypfhg6trddjhygrcyqezcgpzfysywmm5ypxxjemgw3hxjmn8yptk7untd9hxwg3q2d6xjcmtv4ezq7pqxgsxzmnyyqcjqmt0wfjjq6t5v4khxxqyjw5qcqp2rzjq0gxwkzc8w6323m55m4jyxcjwmy7stt9hwkwe2qxmy8zpsgg7jcuwz87fcqqeuqqqyqqqqlgqqqqn3qq9qn07ytgrxxzad9hc4xt3mawjjt8znfv8xzscs7007v9gh9j569lencxa8xeujzkxs0uamak9aln6ez02uunw6rd2ht2sqe4hz8thcdagpleym0j' });
+
+// Agregar los códigos QR generados en el formulario
+// document.getElementById('amount').insertAdjacentHTML('afterend', `<img src="${ethereumPaymentQr}">`);
+// document.getElementById('recipient_account').insertAdjacentHTML('afterend', `<img src="${bitcoinPaymentQr}">`);
