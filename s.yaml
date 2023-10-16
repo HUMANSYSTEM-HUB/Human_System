@@ -6,7 +6,8 @@ services:
   human-system-service:
     component: fc
     props:
-      region: cn-qingdao
+      region: "cn-hangzhou" # 关于变量的使用方法，可以参考：https://www.serverless-devs.com/serverless-devs/yaml#变量赋值
+
       service:
         name: human-system-service
         description: Human System Service
@@ -16,9 +17,7 @@ services:
       function:
         name: human-system-function
         description: 'Human System API Function'
-        codeUri: './'  # Suponiendo que todo el directorio necesita ser subido
-        handler: 'app.handler'  # Esto debe configurarse correctamente según tu configuración
-        memorySize: 512
+      c memorySize: 512
         runtime: nodejs12
         timeout: 30
       triggers:
