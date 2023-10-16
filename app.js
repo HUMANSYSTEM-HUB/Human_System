@@ -1,4 +1,3 @@
-const express = require('express');
 const crypto = require('crypto');
 const app = express();
 const axios = require('axios');
@@ -413,4 +412,7 @@ app.get('/logout', function (req, res) {
 app.listen(3013, function() {
     console.log('Servidor escuchando en el puerto 3013');
   });
-  
+
+
+
+module.exports.handler = require('serverless-http')(app);

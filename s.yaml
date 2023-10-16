@@ -6,18 +6,18 @@ services:
   human-system-service:
     component: fc
     props:
-      region: cn-hangzhou
+      region: cn-qingdao
       service:
         name: human-system-service
         description: Human System Service
         internetAccess: true
         role: 'acs:ram::5963997423258469:role/AliyunFcDefaultRole'
         tracingConfig: Enable
-        function:
+      function:
         name: human-system-function
-        description: 'Human System API Function'
-        codeUri: './'  # Suponiendo que todo el directorio necesita ser subido
-        handler: 'app.handler'  # Esto debe configurarse correctamente según tu configuración
+        description: 'Human System Web Application'
+        codeUri: '.'  # Esto asume que s.yaml está en la raíz de tu proyecto
+        handler: 'app.handler'
         memorySize: 512
         runtime: nodejs12
         timeout: 30
