@@ -16,7 +16,7 @@ services:
       function:
         name: human-system-function
         description: 'Human System API Function'
-      c memorySize: 512
+        memorySize: 512
         runtime: nodejs12
         timeout: 30
       triggers:
