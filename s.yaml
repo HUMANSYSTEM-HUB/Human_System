@@ -12,7 +12,7 @@ services:
         description: Human System Service
         role: 'acs:ram::5963997423258469:role/aliyunfcdefaultrole'
         internetAccess: true
-        tracingConfig: Enable
+        tracingConfig: Disable
       function:
         name: human-system-function
         description: 'Human System Web Application'
