@@ -1,0 +1,31 @@
+edition: 1.0.0
+name: human-system-app
+access: default
+
+services:
+  human-system-service:
+    component: fc
+    props:
+      region: cn-qingdao
+      service:
+        name: human-system-service
+        description: Human System Service
+        internetAccess: true
+        role: 'acs:ram::5963997423258469:role/AliyunFcDefaultRole'
+        tracingConfig: Enable
+      function:
+        name: human-system-function
+        description: 'Human System API Function'
+        codeUri: './'  # Suponiendo que todo el directorio necesita ser subido
+        handler: 'app.handler'  # Esto debe configurarse correctamente según tu configuración
+        memorySize: 512
+        runtime: nodejs12
+        timeout: 30
+      triggers:
+        - name: httpTrigger
+          type: http
+          config:
+            authType: anonymous
+            methods:
+              - GET
+              - POST
