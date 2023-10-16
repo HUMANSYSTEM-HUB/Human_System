@@ -9,21 +9,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <!-- CSS propio -->
-    <link rel="stylesheet" href="public\css\style.css">
+	<link rel="stylesheet" href="/public/css/tu_archivo.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Ingresa</title>
 </head>
 <body>
 
 <!-- Titulo --> 
-	<div class="pt-2 text-center" style="background-color: white" >
-		<a class="" href="#">
-		  <img class="" src="https://i.ibb.co/TLtfZJm/Captura-de-pantalla-2023-04-28-084724.png" style="max-width:100%;width:auto;height: 70px;;">		
-		  </a>
-	  </div>
-
+<div class="m-2  image-container">
+    <img src="https://i.ibb.co/9btzWMt/About.png" width="100%" height="100%" >
+    </div>
+    
 <!-- Nav --> 
 
 <nav class=" m-2 navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: whitesmoke;">
@@ -36,58 +35,52 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarNav">
 	<ul class="navbar-nav ml-auto align-items-center">
-	<li class="nav-item active">
-	<a class="nav-link" href="register" style="color: #2c758c; font-size: 20px;">Registrate<span class="sr-only">(current)</span></a>
-	</li>
-		<li class="nav-item">
-		<a a class="nav-link" href="#" style="color: #2c758c; font-size: 20px;">Ingresa</a>
-		</li>
+          <li class="nav-item active">
+            <a class="nav-link" href="register" style="color: #2c758c; font-size: 20px;">
+                <i class="fas fa-user-plus"></i> Regístrate
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
 		</ul>
 	</nav>
 		</div>
 	
 <!-- Formulario Inicio de Sesion --> 
-
-<div id="Ingresa" class="text-center align-items-center" style="background-color: whites">
-	<div class="pt-4 pb-4 pr-4 pl-4 m-3 rounded-lg align-items-center "style="background: linear-gradient(to bottom,  #2C758C ,  #F17460 )">
-	<div class="login-form align-items-center " >
-	<div class="register-form form pb-3 pt-3 align-items-center rounded-lg" style="color:#15566a;  background-color: rgba(245, 245, 245, 0.313)">
-		<img class="mb-2" src="https://cdn-icons-png.flaticon.com/512/2867/2867197.png" alt="" width="60" height="60">
-	<form action="auth" method="POST">
-
-			  <div class="text-white ml-4 mr-4 pt-4 pb-4 pr-5 pl-5 rounded-lg " style="background-color: whitesmoke">
-				<main class="form-signin w-100 m-auto" style="color: #2c758c;">
-					<form>
-					  <h6 class="mb-3 fw-normal">Humano:</h6>
-					  <div class="form-floating">
-						<input type="text" name="curp" style="color:#f87d6a" class="form-control" id="floatingInput" placeholder="CURP" minlength="18" maxlength="18">
-						<div class="form-floating mt-3">
-						<div class="m-3"><h6 for="floatingInput ">Contraseña:</h6></div>
-						<input type="password" name="contraseña" style="color:#f87d6a" class="form-control" id="floatingInput" minlength="8" maxlength="20" placeholder="*********">
-					</div>
-					</div>
-					<div class="checkbox m-3">
-						<label>
-						  <input type="checkbox" value="remember-me"> Recordarme
-						</label>
-					  </div>
-					  <button class="w-100 btn btn-info btn-success" type="submit" value="login">Ingresa</button>
-					</form>
-				  </main>
-				</form>
-					</div>
-				</div>
+<div id="Ingresa" class="text-center align-items-center" style="background-color: white;">
+    <div class="pt-4 pb-4 pr-4 pl-4 m-3 rounded-lg align-items-center" style="background: linear-gradient(to bottom, #2C758C, #F17460);">
+        <div class="login-form align-items-center">
+            <div class="register-form form pb-3 pt-3 align-items-center rounded-lg" style="color:#15566a; background-color: rgba(245, 245, 245, 0.313)">
+                <img class="mb-2" src="https://cdn-icons-png.flaticon.com/512/2867/2867197.png" alt="" width="60" height="60">
+                <form action="/auth" method="POST">
+                    <div class="text-white ml-4 mr-4 pt-4 pb-4 pr-5 pl-5 rounded-lg" style="background-color: whitesmoke">
+                        <h6 class="mb-3 fw-normal"  style="color:#2C758C">Humano:</h6>
+                        <input type="text" name="humano" style="color:#f87d6a" class="form-control" id="humanoInput" placeholder="Humano" minlength="14" maxlength="18">
+                        
+                        
+                            <h6 for="passwordInput" class="mt-4" style="color:#2C758C">Contraseña:</h6>
+                            <input type="password" name="contraseña" style="color:#f87d6a" class="form-control" id="passwordInput" minlength="8" maxlength="20" placeholder="*********">
+                    
+                        
+                        <div class="checkbox m-3" style="color:#2C758C">
+                            <label>
+                                <input type="checkbox" name="remember-me" value="remember-me"> Recordarme
+                            </label>
+                        </div>
+                        <button class="w-100 btn btn-info btn-success" type="submit">Ingresa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="color: #2d7990;" class="mt-5">
+        <a href="#">
+            <img src="https://i.ibb.co/f4vZNKd/Captura-de-pantalla-2023-04-29-201016.png" width="80" height="80" alt="Logo">       
+        </a>
+        <p class="m-0 pb-4">
+            Programador Sergio Campos Medina. <br> Registro de obra No.03-2022-050214132600-01<br>  &copy; 2022-2027
+        </p>
+    </div>
 </div>
-</div>
-
-
-<div style="color: #2d7990 " class="mt-" style="background-color: white;">
-	<a class="" href="#">
-	  <img class="" src="https://i.ibb.co/f4vZNKd/Captura-de-pantalla-2023-04-29-201016.png" width="80" height="80" alt="Logo">		
-	  </a>
-	<p class="m-0 pb-4"> Programador Sergio Campos Medina. <br> Registro de obra No.03-2022-050214132600-01<br>  &copy; 2022-2027</p>
-
-  </div>
 
 <!-- Scripts -->
 

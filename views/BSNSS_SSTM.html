@@ -1,0 +1,1764 @@
+<!doctype html>
+<html lang="en">
+  
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://i.ibb.co/PTcH9jG/Imagen1.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- CSS propio -->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.130.2/build/three.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Agregar el enlace al script de FullCalendar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <title>Inicio</title>
+  </head>
+  
+<!-- Body -->  
+<body>   
+
+<!-- Nav -->
+<style>@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+  #Navbar, .navbar, .card, .nav-link, .nav-user, .nav-building, .nav-link1, .nav-link2, .nav-link4, .nav-link5, .nav-link6, .nav-link7 {
+    font-family: 'Orbitron', sans-serif;
+  }
+#pricing-container {
+    display: none;
+}
+#Navbar {
+  background-color: white;  
+  padding: 0px 0;
+}
+
+.navbar {
+  background-color: rgb(2, 2, 2);
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+
+.navbar img {
+  border-radius: 20%;
+  margin-right: 10px;
+}
+
+
+
+.search-container {
+  position: relative;
+  width: 250px;
+  margin-right: 10px;
+}
+
+#suggestions {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+.nav-link, .nav-transactions, .nav-user, .nav-building, .nav-link1, .nav-link2, .nav-link4, .nav-link5, .nav-link6, .nav-link7, .nav-statistics, .nav-documents{
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+  margin: 16px 0;
+  background-color: #f9f9f9;
+} 
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.card-description {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.card-date {
+  font-size: 14px;
+  color: #777;
+}
+
+.productos-container, .amigos-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.producto, .amigo {
+  flex: 0 0 30%;
+  text-align: center;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.producto img, .amigo img {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 50%;
+}
+</style>
+<div id="Navbar" class="text-center sticky-top pl-2 mt-1 pr-2">
+  <nav class="navbar navbar-expand-lg">
+      <!-- Logo -->
+      <img src="https://i.ibb.co/g9kH92V/Dise-o-sin-t-tulo-5.png" alt="Logo" width="60" height="60">
+
+      <!-- Búsqueda -->
+      <div class="search-container ml-3">
+          <div class="input-group">
+              <input type="text" id="search-input" class="form-control" placeholder="Buscar . . .">
+              <div class="input-group-append">
+                  <button id="search-btn" class="btn btn-warning"><i class="fas fa-robot"></i></button>
+              </div>
+          </div>
+          <div id="suggestions" class="rounded-lg">
+              <div class="text-white pt-2 pr-2 pl-2"></div>
+          </div>
+      </div>
+
+      <!-- Elementos del menú -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto align-items-center">
+                 <!-- Notificaciones de medios -->
+          <li class="nav-item">
+              <a class="nav-link1" href="#" style="color: #9c9424; font-size: 25px;"><i class="fas fa-file-media"></i></a>
+          </li>
+      
+          <!-- Información de tarjeta -->
+          <li class="nav-item">
+              <a class="nav-user" style="color: #9c9424; font-size: 25px;" href="#"><span class="fa fa-file-signature"></span></a>
+          </li>
+      
+          <!-- Empresas -->
+          <li class="nav-item">
+              <a class="nav-building ml-2" style="color: #9c9424; font-size: 25px;" href="#" onclick="mostrarEmpresas()"><i class="fas fa-building"></i></a>
+          </li>
+      
+          <!-- Amigos recientes -->
+          <li class="nav-item">
+              <a class="nav-link2" style="color: #9c9424; font-size: 25px;" href="#" onclick="mostrarAmigosRecientes()"><i class="fas fa-users"></i></a>
+          </li>
+      
+          <!-- Mensajes -->
+          <li class="nav-item">
+              <a class="nav-link4" style="color: #9c9424; font-size: 25px;" href="#" onclick="mostrarMensajesRecientes()"><i class="fas fa-envelope"></i></a>
+          </li>
+      
+              <!-- Transacciones -->
+          <li class="nav-item">
+            <a class="nav-transactions" href="#" style="color: #9c9424; font-size: 25px;"><i class="fas fa-exchange-alt"></i></a>
+        </li>
+        
+          <!-- Documentos -->
+          <li class="nav-item">
+            <a class="nav-documents" href="#" style="color: #9c9424; font-size: 25px;"><i class=" fas fa-folder-open"></i></a>
+        </li> 
+
+          <!-- Estadistica -->
+          <li class="nav-item">
+            <a class="nav-statistics" href="#" style="color: #9c9424; font-size: 25px;"><i class=" fas fa-chart-line"></i></a>
+        </li>
+
+      
+        <!-- Carrito de compras -->
+        <li class="nav-item">
+          <a class="nav-link7" style="color: #9c9424; font-size: 25px;" href="#" onclick="mostrarCarritoDeCompras()"><i class="fas fa-shopping-cart"></i></a>
+      </li>
+
+          <!-- Información de Stripe -->
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color: #9c9424; font-size: 15px;"><i class="fas fa-info fa-lg"></i></a>
+        </li>
+        
+      
+          <!-- Salir -->
+          <li class="nav-item">
+              <a class="nav-link9" href="logout" style="color: #9c9424; font-size: 25px;"><i class="fas fa-sign-out-alt"></i></a>
+          </li>
+      </ul>
+      
+      </div>
+  </nav>
+</div>
+
+<script>
+  document.querySelector('.nav-transactions').addEventListener('click', function(event) {
+    event.preventDefault();
+    
+    // Datos de ejemplo para las transacciones
+    const transacciones = [
+        {
+            fecha: "2023-09-01",
+            descripcion: "Compra en Tienda ABC",
+            monto: "$150.00",
+            tipo: "Débito"
+        },
+        {
+            fecha: "2023-09-05",
+            descripcion: "Depósito de nómina",
+            monto: "$1,200.00",
+            tipo: "Crédito"
+        },
+        {
+            fecha: "2023-09-07",
+            descripcion: "Retiro en cajero",
+            monto: "$200.00",
+            tipo: "Débito"
+        }
+        // ... puedes agregar más transacciones aquí
+    ];
+    
+    let contenido = `
+        <div>
+            ${transacciones.map(transaccion => `
+                <div class="card">
+                    <h4 class="card-title">${transaccion.fecha} - ${transaccion.tipo}</h4>
+                    <p class="card-description"><strong>Descripción:</strong> ${transaccion.descripcion}</p>
+                    <p class="card-description"><strong>Monto:</strong> ${transaccion.monto}</p>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    
+    Swal.fire({
+        title: "Transacciones Recientes",
+        html: contenido,
+        confirmButtonText: "Cerrar",
+        width: '600px',
+    });
+});
+
+  document.querySelector('.nav-statistics').addEventListener('click', function(event) {
+      event.preventDefault();
+      
+      const contenido = `
+          <div class="card">
+              <h4 class="card-title">Estadísticas del Mes</h4>
+              <p class="card-description"><strong>Visitas:</strong> 5,000</p>
+              <p class="card-description"><strong>Productos Vendidos:</strong> 1,200</p>
+              <p class="card-description"><strong>Ganancias:</strong> $10,000</p>
+              <p class="card-description"><strong>Mensajes Recibidos:</strong> 450</p>
+              <!-- Puedes agregar más estadísticas aquí -->
+          </div>
+      `;
+      
+      Swal.fire({
+          title: "Estadísticas",
+          html: contenido,
+          confirmButtonText: "Cerrar",
+          width: '600px',
+      });
+  });
+
+document.querySelector('.nav-documents').addEventListener('click', function(event) {
+    event.preventDefault();
+    
+    const contenido = `
+        <div>
+            <div class="card">
+                <h4 class="card-title">Imágenes</h4>
+                <p class="card-description"><a href="#" target="_blank">Imagen 1</a></p>
+                <p class="card-description"><a href="#" target="_blank">Imagen 2</a></p>
+            </div>
+            <div class="card">
+                <h4 class="card-title">Videos</h4>
+                <p class="card-description"><a href="#" target="_blank">Video 1</a></p>
+                <p class="card-description"><a href="#" target="_blank">Video 2</a></p>
+            </div>
+            <div class="card">
+                <h4 class="card-title">Audios</h4>
+                <p class="card-description"><a href="#" target="_blank">Audio 1</a></p>
+                <p class="card-description"><a href="#" target="_blank">Audio 2</a></p>
+            </div>
+            <div class="card">
+                <h4 class="card-title">Documentos</h4>
+                <p class="card-description"><a href="#" target="_blank">Documento 1</a></p>
+                <p class="card-description"><a href="#" target="_blank">Documento 2</a></p>
+            </div>
+        </div>
+    `;
+    
+    Swal.fire({
+        title: "Documentos",
+        html: contenido,
+        confirmButtonText: "Cerrar",
+        width: '600px',
+    });
+});
+
+    /* ---------- Búsqueda con sugerencias ---------- */
+    const button = document.querySelector('#search-btn');
+    const suggestions = document.querySelector('#suggestions');
+
+    button.addEventListener('click', async () => {
+        const query = document.getElementById('search-input').value;
+
+        try {
+            const response = await axios.post('/get-response', { message: query });
+            const modelResponse = response.data.message;
+
+            // Actualizar el contenido de la publicación/sugerencia basada en la respuesta
+            suggestions.querySelector('.text-white').innerHTML = modelResponse;
+
+            // Mostrar el div de sugerencia
+            suggestions.style.display = 'block';
+        } catch (error) {
+            console.error(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'An error occurred while getting the response from the model.',
+            });
+        }
+    });
+
+    
+    // Obtén el elemento del enlace
+    const linkMedia = document.querySelector('.nav-link1');
+
+    // Agrega un event listener para el clic
+    linkMedia.addEventListener('click', () => {
+        // Muestra el cuadro de alerta SweetAlert
+        Swal.fire({
+            icon: 'info', // Icono de información
+            title: 'Notificación', // Título del cuadro de alerta
+            text: 'Tienes una notificación.', // Texto del cuadro de alerta
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown' // Agrega una animación al mostrar
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp' // Agrega una animación al ocultar
+            }
+        });
+    });
+    /* ---------- Mostrar información de la tarjeta ---------- */
+    function mostrarSweetAlert() {
+        const nombreHumano = "Tarjeta de Identificación Humana Digital";
+        const idHumano = "ID12345678";
+        const saldo = "$1,000.00";
+        const numeroTarjeta = "1234-5678-9101-1121";
+
+        const qrElement = document.createElement("div");
+
+        // Generar el código QR usando la biblioteca 'qrcode.js'
+        const qr = new QRCode(qrElement, {
+            text: idHumano,
+            width: 128,
+            height: 128,
+        });
+
+        const contenido = `
+            <div id="card-container">
+                <div class="card-detail"><span class="card-icon fa fa-user"></span>Nombre: ${nombreHumano}</div>
+                <div class="card-detail"><span class="card-icon fa fa-credit-card"></span>Número: ${numeroTarjeta}</div>
+                <div class="card-detail"><span class="card-icon fa fa-dollar-sign"></span>Saldo: ${saldo}</div>
+                <div class="card-detail"><span class="card-icon fa fa-id-card"></span>ID: ${idHumano}</div>
+                <div style="text-align: center; margin-top: 20px;">${qrElement.outerHTML}</div>
+            </div>
+        `;
+
+        Swal.fire({
+            title: "Información de la Tarjeta",
+            html: contenido,
+            confirmButtonText: "Cerrar",
+        });
+    }
+
+    // Asignar el evento click al enlace para mostrar el SweetAlert
+    const enlaceTarjeta = document.querySelector(".nav-user");
+    enlaceTarjeta.addEventListener("click", mostrarSweetAlert);
+
+    /* ---------- Mostrar empresas ---------- */
+    function mostrarEmpresas() {
+        const empresas = [
+            { nombre: "Empresa 1", descripcion: "Descripción de la Empresa 1" },
+            { nombre: "Empresa 2", descripcion: "Descripción de la Empresa 2" },
+            { nombre: "Empresa 3", descripcion: "Descripción de la Empresa 3" },
+        ];
+
+        const contenido = empresas.map(empresa => `
+            <div class="card">
+                <div class="card-title">${empresa.nombre}</div>
+                <div class="card-description">${empresa.descripcion}</div>
+            </div>
+        `).join("");
+
+        Swal.fire({
+            title: "Empresas",
+            html: contenido,
+            confirmButtonText: "Cerrar",
+        });
+    }
+
+    /* ---------- Mostrar amigos recientes ---------- */
+    function mostrarAmigosRecientes() {
+        const amigosRecientes = [
+            { nombre: "Amigo 1", descripcion: "Descripción del Amigo 1" },
+            { nombre: "Amigo 2", descripcion: "Descripción del Amigo 2" },
+            { nombre: "Amigo 3", descripcion: "Descripción del Amigo 3" },
+        ];
+
+        const contenido = amigosRecientes.map(amigo => `
+            <div class="card">
+                <div class="card-title">${amigo.nombre}</div>
+                <div class="card-description">${amigo.descripcion}</div>
+            </div>
+        `).join("");
+
+        Swal.fire({
+            title: "Amigos Recientes",
+            html: contenido,
+            confirmButtonText: "Cerrar",
+        });
+    }
+
+    /* ---------- Mostrar mensajes recientes ---------- */
+    function mostrarMensajesRecientes() {
+        const mensajesRecientes = [
+            { remitente: "Amigo 1", mensaje: "Hola, ¿cómo estás?" },
+            { remitente: "Amigo 2", mensaje: "Nos vemos mañana" },
+            { remitente: "Amigo 3", mensaje: "Tienes un nuevo mensaje" },
+        ];
+
+        const contenido = mensajesRecientes.map(mensaje => `
+            <div class="card">
+                <div class="card-title">${mensaje.remitente}</div>
+                <div class="card-description">${mensaje.mensaje}</div>
+            </div>
+        `).join("");
+
+        Swal.fire({
+            title: "Mensajes Recientes",
+            html: contenido,
+            confirmButtonText: "Cerrar",
+        });
+    }
+
+    /* ---------- Mostrar carrito de compras ---------- */
+    function mostrarCarritoDeCompras() {
+        const productosCarrito = [
+            { nombre: "Producto 1", descripcion: "Descripción del Producto 1", precio: "$100" },
+            { nombre: "Producto 2", descripcion: "Descripción del Producto 2", precio: "$200" },
+            { nombre: "Producto 3", descripcion: "Descripción del Producto 3", precio: "$300" },
+        ];
+
+        const contenido = productosCarrito.map(producto => `
+            <div class="card">
+                <div class="card-title">${producto.nombre}</div>
+                <div class="card-description">${producto.descripcion}</div>
+                <div class="card-description">${producto.precio}</div>
+            </div>
+        `).join("");
+
+        Swal.fire({
+            title: "Carrito de Compras",
+            html: contenido,
+            confirmButtonText: "Cerrar",
+        });
+    }
+    // Mostrar información de Stripe
+    document.querySelector('.nav-link').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        // Obtener el contenido del div
+        let divContent = document.getElementById('pricing-container').innerHTML;
+
+        Swal.fire({
+            html: divContent,
+            showCloseButton: true,
+            focusConfirm: false,
+            confirmButtonText: 'Cerrar',
+        });
+    });
+</script>
+
+<div id="pricing-container" class="rounded-lg pt-2 mt-3">
+  <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+  <stripe-pricing-table
+    pricing-table-id="prctbl_1NtxIoBNUCxInZmnWZmzMsYv"
+    publishable-key="pk_live_51NSLmIBNUCxInZmnL6E2lNVgEqJXiBU9WOVrj53JxNUradDkE8gR2IbOUdstUibAlv766OmwsylWauUv4ptRa2lk00w9DO2Go6"
+  >
+  </stripe-pricing-table>
+</div>
+
+
+<div id="conoceme" class="text-center p-3" style="background-color: white;">
+	<div class="p-3 text-white rounded-lg" style="background: linear-gradient(to right,  #000000 ,  #9c9424)">
+    <div class="row">
+      <div class="col-md-3 align-self-center">
+        <div class="col mb-3 p-3 col-md text-white rounded-lg"  style="background-color: white">
+          <img class="mt-1 rounded-lg" src="https://i.ibb.co/Nxkbn3C/Dise-o-sin-t-tulo-3.png"  width="110" height="110" alt="Logo">
+         <!--  <% if (login) { %> -->
+          <div class="" ALIGN="" ><h4 style="color:#9c9424">Empresa:</h4>
+            <P style="color:#000000"><!-- <%= nombre %> --></P>
+            <div><h6 style="color:#9c9424">Humano:</h6><p style="color:#f87d6a"><!-- <%= curp %> --></p></div>
+            <div>
+              <h6 style="color:#9c9424">Cargo:</h6>
+              <p style="color:#000000">
+                <!-- <%= tarjeta_chip.replace(/(.{4})/g, '$1-') %>  --><!-- Utiliza el método replace() para insertar guiones después de cada grupo de 4 caracteres -->
+              </p>
+            </div>
+            <div id="qrcode" class=" mb-3"></div>
+        </div>
+          <div class="col col-md pt-3 text-white p-1 rounded-lg" style="background-color: whitesmoke" >
+          <div class="ml-2" ALIGN="left">           
+              <div><h6 style="color:#9c9424">Descripción:</h6><p style="color:#030303">Estudiante apasionado por la politica</p></div>
+                      </div> 
+                        </form>
+                        <div class="mb-3">
+<!-- Botón de Usuario -->
+<a href="#" target="_blank" style="color: #9c9424; font-size: 21px;"rel="noopener noreferrer"><i class="mr-2 fas fa-user"></i></a>
+
+<!-- Botón de Empleo -->
+<a href="#" target="_blank" style="color: #9c9424; font-size: 21px;" rel="noopener noreferrer"><i class="mr-2 fas fa-briefcase"></i></a>
+
+
+                        <!-- Botón de Instagram -->
+<a href="https://www.instagram.com/" style="color: #9c9424; font-size: 21px;" target="_blank" rel="noopener noreferrer"><i class="mr-2 fab fa-instagram"></i></a>
+
+<!-- Botón de Facebook -->
+<a href="https://www.facebook.com/" style="color: #9c9424; font-size: 21px;" target="_blank" rel="noopener noreferrer"><i class="mr-2 fab fa-facebook"></i></a>
+
+<!-- Botón de Youtube -->
+<a href="https://www.youtube.com/" style="color: #9c9424; font-size: 21px;" target="_blank" rel="noopener noreferrer"><i class="mr-2 fab fa-youtube"></i></a>
+
+<!-- Botón de LinkedIn -->
+<a href="https://www.linkedin.com/" style="color: #9c9424; font-size: 21px;"target="_blank" rel="noopener noreferrer"><i class="mr-2 fab fa-linkedin"></i></a>
+
+<a href="https://www.twitter.com/" style="color: #9c9424 ; font-size: 21px;"><i class="mr-2 fab fa-twitter"></i></a>
+<a href="https://www.tiktok.com/" style="color: #9c9424; font-size: 21px;"><i class=" fab fa-tiktok"></i></a>
+
+
+
+</div>
+              </div>
+              <button id="btnQR" type="submit" class="mt-3 btn btn-danger"><i class="fas fa-wifi"></i> </button>
+              
+              <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+              <script>
+                  // Obtiene los datos del usuario desde tus variables
+  var username = '<%= nombre %>';
+  var userID = '<%= curp %>';
+
+  // Genera el código QR utilizando la biblioteca qrcode.js
+  var qrCode = new QRCode(document.getElementById('qrcode'), {
+    text: 'Nombre: ' + username + '\nID: ' + userID,
+    width: 128,
+    height: 128
+  });
+                // Agrega un evento clic al botón
+                document.getElementById('btnQR').addEventListener('click', function() {
+                  // Obtiene los datos del usuario desde tus variables
+                  var username = '<%= nombre %>';
+                  var userID = '<%= curp %>';
+                            
+                  // Muestra el Swal.fire con el código QR generado
+                 Swal.fire({
+  title: 'Código QR',
+  html: '<div id="qrcode"></div>',
+  showCancelButton: false,
+  showConfirmButton: false,
+  didOpen: function() {
+    // Llama a la función qrCode.makeCode para generar el código QR en el elemento HTML
+    qrCode.makeCode('Nombre: ' + username + '\nID: ' + userID);
+  }
+});
+                });
+              </script>
+              
+            <!-- <% } %> -->
+            </div>
+            <div class="col p-3 mb-3 col-md text-white rounded-lg" style="background-color: #9c9424;">
+              <div class="text-white pt-2 rounded-lg" style="background-color: #ffffff54">
+                <div class="container text-center">
+                  <div class="pb-3">
+                    <form id="publicacionForm" enctype="multipart/form-data">
+                      <div class="form-group">
+                                                <label for="titulo"><h6>Título</h6></label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="texto"><h6>Descripción</h6></label>
+                        <textarea class="form-control" id="texto" name="texto" rows="3"></textarea>
+                      </div>
+                      <label for="imagen" class="mt-2 mr-3"><i class="fas fa-image fa-lg text-white"></i></label>
+                      <input type="file" class="form-control-file d-none" id="imagen" name="imagen">
+                      <label for="video" class="mr-3"><i class="fas fa-video fa-lg text-white"></i></label>
+                      <input type="file" class="form-control-file d-none" id="video" name="video">
+                      <label for="archivo" class="mr-3"><i class="fas fa-file-alt fa-lg text-white"></i></label>
+                      <input type="file" class="form-control-file d-none" id="archivo" name="archivo">
+                      <label for="imagen"><i class="fas fa-grin fa-lg text-white"></i></label>
+                      <label for="imagen"><i class="fas fa-poll ml-3 fa-lg text-white"></i></label>
+                      <label for="imagen"><i class="fas fa-volume-up ml-3"></i></label>
+                      <label for="imagen"><i class="fas fa-dollar-sign ml-3"></i></label>
+                      <br>
+                      <button type="submit" class="mt-2 btn btn-success"><i class="fas fa-upload mr-3"></i>Publicar</button>
+                      <button class=" mt-2  btn btn-secondary dropdown-toggle" type="button" id="menuDesplegable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="menuDesplegable">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-globe-americas"></i> Mundo
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user-lock"></i> Persona con Candado
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-users"></i> Socios o Amigos
+                        </a>
+                    </div>
+                    </form>
+                  </div>
+                  
+                       
+                  
+                  
+                </div>
+              </div>
+            
+            </div>
+          
+           
+          <div class="col col-md text-white p-2 mb-3 rounded-lg" style="background-color: #747c84 ">
+            <h4 class="mt-2" style="color:whitesmoke"> Amigos <i class="ml-1 fa fa-users"></i></h4>
+           
+            <button id="addFriendBtn" class="btn btn-dark mb-2"><i class="fas fa-user-plus mr-2"></i>Agregar Amigo</button>
+
+            <script>
+              document.getElementById('addFriendBtn').addEventListener('click', function() {
+                  Swal.fire({
+                      title: 'Agregar Amigo',
+                      input: 'text',
+                      inputPlaceholder: 'Buscar amigo...',
+                      confirmButtonText: 'Agregar',
+                      showCancelButton: true,
+                      cancelButtonText: 'Cancelar',
+                      inputValidator: (value) => {
+                          if (!value) {
+                              return '¡Necesitas escribir algo!';
+                          }
+                      },
+                      preConfirm: (friendName) => {
+                          // Aquí puedes manejar el valor ingresado, por ejemplo, enviarlo a tu servidor o realizar alguna otra acción
+                          // ...
+                      }
+                  });
+              });
+              </script>
+              
+
+            <form action="#" method="GET" class="mb-3">
+              <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Buscar amigo...">
+                  <div class="input-group-append">
+                      <button class="btn btn-dark" type="submit"><i class="fas fa-search"></i></button>
+                  </div>
+              </div>
+          </form>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="list-group" id="lista-amigos" role="tablist">
+                  <a class="list-group-item list-group-item-action active btn-dark" data-toggle="list" href="#amigo1" role="tab">Juan Pérez</a>
+                  <a class="list-group-item list-group-item-action btn-dark" data-toggle="list" href="#amigo2" role="tab">María García</a>
+                  <a class="list-group-item list-group-item-action btn-dark" data-toggle="list" href="#amigo3" role="tab">Carlos López</a>
+                </div>
+              </div>
+                <div class="col-md-8 mt-3">
+                    <div class="tab-content" id="contenido-amigos">
+                      <div class="tab-pane fade" id="amigo2" role="tabpanel">
+                        <img src="avatar2.jpg" alt="Avatar 2" class="img-fluid rounded-circle">
+                        <h5>María García</h5>
+                        <p>Descripción de María García...</p>
+                      </div>
+              
+                        <div class="tab-pane fade" id="amigo3" role="tabpanel">
+                          <img src="avatar3.jpg" alt="Avatar 3" class="img-fluid rounded-circle">
+                          <h5>Carlos López</h5>
+                          <p>Descripción de Carlos López...</p>
+                        </div>
+                        <div class="tab-pane fade show active" id="amigo1" role="tabpanel">
+                          <img src="avatar1.jpg" alt="Avatar 1" class="img-fluid rounded-circle">
+                          <h5>Juan Pérez</h5>
+                          <p>Descripción de Juan Pérez...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+                <div class="col col-md text-white p-2 rounded-lg" style="background-color: #0463cb">
+                    <h4 class="mt-2" style="color:#ffffff;"> Mensajes <i class="ml-1 fa fa-envelope"></i></h4>
+                    <form action="#" method="GET" class="mb-3">
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Buscar mensajes...">
+                          <div class="input-group-append">
+                              <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                          </div>
+                      </div>
+                  </form>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="list-group" id="lista-conversaciones" role="tablist" style="">
+                          <a class="list-group-item list-group-item-action active btn-primary" data-toggle="list" href="#conversacion1" role="tab">
+                            <img src="ruta/al/avatar_claudia.jpg" alt="" class="rounded-circle" style="width:30px;"> Claudia
+                        </a>
+                        <a class="list-group-item list-group-item-action active btn-primary" data-toggle="list" href="#conversacion1" role="tab">
+                          <img src="ruta/al/avatar_claudia.jpg" alt="" class="rounded-circle" style=" width:30px;"> Marcelo
+                      </a>   
+                      <a class="list-group-item list-group-item-action active btn-primary" data-toggle="list" href="#conversacion1" role="tab">
+                        <img src="ruta/al/avatar_claudia.jpg" alt="" class="rounded-circle" style=" width:30px;"> Claudia
+                    </a>   
+                         </div>
+                      </div>
+                      <div class="col-md-8 mt-3">
+                        <div class="tab-content" id="contenido-conversaciones">
+                          <div class="tab-pane fade show active" id="conversacion1" role="tabpanel">
+                            <div class="chat-container">
+                              <div class="chat-message">
+                                <div class="chat-message-content" >
+                                  Claudia: Hola, ¿cómo estás? 
+                                </div>
+                                <div class="chat-message-time"  >
+                                 24/04/23 - 10:00 AM
+                                </div>
+                              </div>
+                              <div class="chat-message">
+                                <div class="chat-message-content"  >
+                                 Yo: Estoy bien, gracias por preguntar. ¿Y tú?
+                                </div>
+                                <div class="chat-message-time" >
+                                  24/04/23 - 10:05 AM
+                                </div>
+                              </div>
+                            </div>
+                             <form action="#" method="POST" class="chat-form">
+            <div class="input-group mt-2">
+                <input type="text" class="form-control" placeholder="Escribe...">
+                <div class="input-group-append">
+                    <button class="btn btn-" type="button">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button class="btn btn-warning" type="button">
+                        <i class="fas fa-smile"></i>
+                    </button>
+                    <button class="btn btn-primary" type="submit">
+                        <i class="mr-2 fas fa-paper-plane"></i>Enviar
+                    </button>
+                </div>
+            </div>
+        </form>
+                          </div>
+                          <div class="tab-pane fade" id="conversacion2" role="tabpanel">
+                            <div class="chat-container">
+                              <div class="chat-message">
+                                <div class="chat-message-content " style="color:#0463cb;">
+                                 Marcelo:
+                                ¿Qué planes tienes para hoy?
+                                </div>
+                                <div class="chat-message-time"  style="color:#0463cb;">
+ 12/02/30 - 5:43 PM
+  </div>
+  </div>
+  <div class="chat-message">
+  <div class="chat-message-content"  style="color:#0463cb;">
+Yo: Nada en particular, ¿tú?
+  </div>
+  <div class="chat-message-time" style="color:#0463cb;">
+    12/02/30 - 5:50 PM
+  </div>
+  </div>
+  </div>
+  <form action="#" method="POST" class="chat-form">
+  <div class="input-group mt-2">
+  <input type="text" class="form-control" placeholder="Escribe...">
+  <div class="input-group-append">
+  <button class="btn btn-primary" type="submit"><i class="mr-2 fas fa-paper-plane"></i>Enviar</button>
+  </div>
+  </div>
+  </form>
+  </div>
+  <div class="tab-pane fade" id="conversacion3" role="tabpanel">
+  <div class="chat-container">
+  <div class="chat-message">
+  <div class="chat-message-content" style="color:#0463cb;">
+  Adan: ¿Qué opinas de la película que vimos ayer?
+  </div>
+  <div class="chat-message-time" style="color:#0463cb;">
+  05/01/23 - 8:13 PM
+  </div>
+  </div>
+  <div class="chat-message">
+  <div class="chat-message-content" style="color:#0463cb;">
+  Yo: Me gustó bastante, ¿a ti?
+  </div>
+  <div class="chat-message-time" style="color:#0463cb;">
+    05/01/23 - 8:52 PM
+  </div>
+  </div>
+  </div>
+  <form action="#" method="POST" class="chat-form">
+  <div class="input-group mt-2">
+  <input type="text" class="form-control" placeholder="Escribe...">
+  <div class="input-group-append">
+  <button class="btn btn-primary" type="submit"><i class="mr-2 fas fa-paper-plane"></i>Enviar</button>
+  </div>
+  </form>
+  </div>
+  
+  </div>  
+</div>
+  </div>
+  </div>
+  </div>
+
+  <div class="col col-md mt-3 mb-3 text-white p-2 rounded-lg " style="background-color: #f87d6a">
+   
+    <h3><i class="fas fa-wallet wallet-icon " style="font-size: 30;" ></i> Wallet</h3>
+
+            <div>
+              <h5>Balance:</h5>
+              <p id="balance">0 HMC</p>
+            </div>
+            
+
+            <div class="mt-3 p-2 rounded-lg" style="background-color: #ffffff54">
+      <div class="list-group" id="lista-conversaciones" role="tablist">
+        <a class="list-group-item list-group-item-action active btn-outline-warning" data-toggle="list" href="#pago-linea" role="tab">Pago en línea</a>
+        <a class="list-group-item list-group-item-action btn-outline-warning" data-toggle="list" href="#transaccion-cripto" role="tab">Transacción de criptomonedas</a>
+      </div>
+      <div class="mb-1 mt-3">
+        <div class="tab-content" id="contenido-conversaciones">
+          <div class="tab-pane fade show active" id="pago-linea" role="tabpanel">
+            <form action="procesar_pago_linea.php" method="POST">
+              <div class="form-group">
+                <i class="fas fa-id-card"></i>
+                <label for="curp">Humano</label>
+                <input type="text" class="form-control" id="curp" name="curp" required>
+              </div>
+              <div class="form-group">
+                <i class="fas fa-money-bill"></i>
+                <label for="moneda">Moneda</label>
+                <input type="text" class="form-control" id="moneda" name="moneda" required>
+              </div>
+              <div class="form-group">
+                <i class="fas fa-dollar-sign"></i>
+                <label for="monto">Monto</label>
+                <input type="number" class="form-control" id="amount" name="monto" step="0.01" min="0" required placeholder="$ 1,280.50">
+              </div>
+              <button onclick="sendHumanCoin()" type="submit" class="btn btn-warning"><i class="fas fa-credit-card mr-2"></i>Realizar pago en línea</button>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="transaccion-cripto" role="tabpanel">
+            <form action="procesar_transaccion_cripto.php" method="POST">
+              <div class="form-group">
+                <i class="fas fa-id-card"></i>
+                <label for="curp">Humano</label>
+                <input type="text" class="form-control" id="curp" name="curp" required>
+              </div>
+              <div class="form-group">
+                <i class="fab fa-bitcoin"></i>
+                <label for="criptomoneda">Criptomoneda</label>
+                <input type="text" class="form-control" id="criptomoneda" name="criptomoneda" required>
+              </div>
+              <div class="form-group">
+                <i class="fas fa-dollar-sign"></i>
+                <label for="monto">Monto</label>
+                <input type="number" class="form-control" id="monto" name="monto" step="0.00000001" min="0" required>
+              </div>
+              <div class="form-group">
+                <i class="fas fa-arrow-up"></i>
+                <label for="direccion_remitente">Dirección del remitente</label>
+                <input type="text" class="form-control" id="direccion_remitente" name="direccion_remitente" required>
+              </div>
+              <div class="form-group">
+                <i class="fas fa-arrow-down"></i>
+                <label for="direccion_destinatario">Dirección del destinatario</label>
+                <input type="text" class="form-control" id="direccion_destinatario" name="direccion_destinatario" required>
+              </div>
+              <button type="submit" class="btn btn-warning"><i class="fas fa-exchange-alt mr-2"></i>Realizar transacción de criptomonedas</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+<h4 class="mt-4">Movimientos </h4>
+
+    <div class=" mt-3 p-2 rounded-lg" style="background-color: #ffffff54">
+      <form action="#" method="GET" class="mb-2">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar movimientos...">
+            <div class="input-group-append2">
+                <button class="btn btn-outline-warning" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </form>
+      <div class="list-group" id="lista-conversaciones" role="tablist">
+        <a class="list-group-item list-group-item-action active btn-outline-warning" data-toggle="list" href="#ticket1" role="tab">Pago 1</a>
+        <a class="list-group-item list-group-item-action btn-outline-warning" data-toggle="list" href="#ticket2" role="">Pago 2</a>
+        <a class="list-group-item list-group-item-action btn-outline-warning" data-toggle="list" href="#ticket3" role="">Pago 3 </a>
+      </div>
+      <div class="mb-1 mt-3">
+        <div class="tab-content" id="contenido-conversaciones">
+          <div class="tab-pane fade show active" id="ticket1" role="tabpanel">
+            <div class="chat-container">
+              <div class="chat-message">
+                <div class="chat-message-content" style="color:black;">
+                  Cuenta de origen: 123456789<br>
+                  Cuenta de destino: 987654321<br>
+                  Monto: $100<br>
+                  Fecha: 27 de abril de 2023
+                </div>
+                <div class="chat-message-time"  style="color:black;">
+                 Hora: 10:00 AM
+                </div>
+              </div>
+              <div class="chat-message">
+                <div class="chat-message-content"  style="color:black;">
+                 Descripción: Agua
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="ticket2" role="tabpanel">
+            <div class="chat-container">
+              <div class="chat-message">
+                <div class="chat-message-content" style="color:black;">
+                  Cuenta de origen: 987654321<br>
+                  Cuenta de destino: 123456789<br>
+                  Monto: $50<br>
+                  Fecha: 27 de abril de 2023
+                </div>
+                <div class="chat-message-time" style="color:black;">
+                  2:00 PM
+                </div>
+              </div>
+              <div class="chat-message">
+                <div class="chat-message-content" style="color:black;">
+                  Se ha recibido su pago correctamente.
+                </div>
+                <div class="chat-message-time" style="color:black;">
+                  2:05 PM
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="ticket3" role="tabpanel">
+            <div class="chat-container">
+              <div class="chat-message">
+                <div class="chat-message-content"style="color: black;">
+                  Cuenta de origen: 111111111<br>
+                  Cuenta de destino: 222222222<br>
+                  Monto: $200<br>
+                  Fecha: 27 de abril de 2023
+                </div>
+                <div class="chat-message-time" style="color: black;">
+                  8:00 PM
+                </div>
+              </div>
+              <div class="chat-message">
+                <div class="chat-message-content" style="color:black;">
+                  Su pago ha sido acreditado en la cuenta destino.
+                </div>
+                <div class="chat-message-time" style="color:black;">
+                  8:05 PM
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+      
+  </div>     
+
+        </div>
+            
+       
+  </div>
+<!-- Aquí se mostrará la publicación -->
+<div class="col-md-9">
+  <div class="d-flex flex-wrap justify-content-between mb-2">
+  <!-- Imagen -->
+        <div class="card1 rounded-lg" style="width: 6rem; background-color: white;">
+            <img src="URL_IMAGEN" class="card-img-top" alt="Imagen">
+            <div class="card-body">
+                  <h6 class="card-title" style="color: #9c9424;; font-size: 0.6rem;">Título Imagen</h6>
+        <p class="card-text" style="color: #9c9424;; font-size: 0.5rem;">Descripción de la imagen.</p>
+  
+            </div>
+        </div>
+
+        <!-- Vídeo -->
+        <div class="card1 rounded-lg" style="width: 6rem; background-color: white;">
+            <video width="50" controls>
+                <source src="URL_VIDEO.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+            <div class="card-body">
+                <h6 class="card-title" style="color: #9c9424; font-size: 0.6rem;">Título Video</h6>
+                <p class="card-text" style="color: #9c9424; font-size: 0.5rem;">Descripción del video.</p>
+            </div>
+        </div> 
+
+        <!-- Música -->
+        <div class="card1 rounded-lg" style="width: 6rem; background-color: white;">
+            <audio controls style="width: 100%;">
+        <source src="URL_MUSICA.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+            <div class="card1 rounded-lg">
+                <small><h6 class="card-title" style="color: #9c9424;; font-size: 0.6rem;">Título Canción</h6></small>
+             </div>
+        </div>
+        
+        <!-- Documento -->
+        <div class="card1 rounded-lg" style="width: 6rem; background-color: white;">
+            <i class="fas fa-file-alt fa-2x" style="color: #9c9424;"></i>
+            <div class="card-body">
+                <h6 class="card-title" style="color: #9c9424; font-size: 0.6rem;">Título Documento</h6>
+                <p class="card-text" style="color: #9c9424; font-size: 0.5rem;">Descripción del documento.</p>
+            </div>
+        </div>
+        <!-- Imagen -->
+        <div class="card1 rounded-lg" style="width: 6rem; background-color: white;">
+            <img src="URL_IMAGEN" class="card-img-top" alt="Imagen">
+            <div class="card-body">
+                <h6 class="card-title" style="color: #9c9424; font-size: 0.6rem;">Título Imagen</h6>
+                <p class="card-text" style="color: #9c9424; font-size: 0.5rem;">Descripción de la imagen.</p>
+            </div>
+        </div>
+
+        <!-- Vídeo -->
+        <div class="card1 rounded-lg" style="width: 6rem; background-color: white;">
+            <video width="50" controls>
+                <source src="URL_VIDEO.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+            <div class="card-body">
+                <h6 class="card-title" style="color: #9c9424;; font-size: 0.6rem;">Título Video</h6>
+                <p class="card-text" style="color: #9c9424;; font-size: 0.5rem;">Descripción del video.</p>
+            </div>
+        </div> 
+
+        <!-- Música -->
+        <div class="card1 rounded-lg" style="width: 6rem; background-color: white;">
+            <audio controls style="width: 100%;">
+        <source src="URL_MUSICA.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+            <div class="card1 rounded-lg">
+                <h6 class="card-title" style="color: #9c9424; font-size: 0.5rem;">Título Canción</h6>
+             </div>
+        </div>
+        
+        <!-- Documento -->
+        <div class="card1 rounded-lg" style="width: 6rem; background-color: white;">
+            <i class="fas fa-file-alt fa-2x" style="color:#9c9424;"></i>
+            <div class="card-body">
+                <h6 class="card-title" style="color: #9c9424; font-size: 0.6rem;">Título Documento</h6>
+                <p class="card-text" style="color: #9c9424; font-size: 0.5rem;">Descripción del documento.</p>
+            </div>
+        </div>
+        
+      <div class="card-body rounded-lg mt-2" style="background-color: white;">
+        <div class="search-container ">
+        <div class="mb-2 input-group">
+            <input type="text" id="search-input" class="form-control" placeholder="Buscar . . .">
+            <div class="input-group-append">
+                <button id="search-btn" class="btn btn-warning" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+      </div>
+    <!-- Tarjetas pequeñas -->
+   <div id="publicacion" class="">
+      <div class="text-white pb-2 pt-2 pr-2 pl-2 rounded-lg" ALIGN="left" style="background-color: whitesmoke">
+        <img class="mt-1 rounded-lg" src="https://i.ibb.co/Nxkbn3C/Dise-o-sin-t-tulo-3.png"  width="30" height="30" alt="Logo">
+        <small class="text-muted" style="color: #9c9424;" >Humano: Sergio CM</small>
+        <h5 class="card-title mt-2" style="color: #9c9424;">${titulo}</h5>
+        <p class="card-text" style="color: #9c9424;">${texto}</p>
+        <img src="" class="img-fluid align-self-center">
+        <small class="text-muted" style="color: #9c9424;">$ 50,490.00</small> <br>
+        <small class="text-muted" style="color: #9c9424;">Fecha de publicación: 08/09/2023 12:30 am. </small>
+        <br> <small class="text-muted " style="color: #9c9424;">Token: a9b8c7d6e5f4321zxy987wvu654tsrqpo3210lkjhgfedcba!@#$%^&*()</small>
+                        <br>
+        <div style="color: #9c9424;" class="mt-1"><i class="fas fa-heart"></i>  15.3M
+          <i class="ml-1 fas fa-comment"></i> 1.2k
+          <i class="ml-1 fas fa-share"></i> 360
+          <i class="ml-1 fas fa-shopping-cart"></i> 1.5k</div>
+
+        <div class="btn-group mt-2">
+        
+          <button type="button" id="heartBtn" class="btn btn-sm btn-outline-danger"><i class="far fa-heart"></i></button>
+<button type="button" id="commentBtn" class="btn btn-sm btn-outline-secondary"><i class="far fa-comment"></i></button>
+<button type="button" id="shareBtn" class="btn btn-sm btn-outline-warning"><i class="fas fa-share"></i></button>
+<button type="button" id="userBtn" class="btn btn-outline-primary"><i class="fas fa-user-plus"></i></button>
+<button type="button" id="moneyBtn" class="btn btn-outline-success"><i class="fas fa-money-bill"></i></button>
+<button type="button" id="exclamationBtn" class="btn btn-sm btn-outline-dark"><i class="fas fa-exclamation-triangle"></i></button>
+</div>
+
+    </div>
+      </div>
+      <div class="d-flex justify-content-between mt-3">
+       
+   </div>
+   </div>
+
+             
+    </div>
+  
+  
+     
+      <script>
+        document.getElementById("publicacionForm").addEventListener("submit", function(event) {
+          event.preventDefault(); // Evita que se recargue la página al enviar el formulario
+          
+          // Obtener los valores de los campos del formulario
+          var titulo = document.getElementById("titulo").value;
+          var texto = document.getElementById("texto").value;
+          
+          // Crear el contenido de la publicación dinámicamente
+          var contenido = `
+            <div class="text-white pt-2 pr-2 pl-2 rounded-lg" ALIGN="left" style="background-color: whitesmoke">
+                <img class="mt-1 rounded-lg" src="https://i.ibb.co/Nxkbn3C/Dise-o-sin-t-tulo-3.png"  width="30" height="30" alt="Logo">
+                <small class="text-muted" >Humano: Sergio CM</small>
+                <h5 class="card-title mt-2" style="color: #15566a">${titulo}</h5>
+                <p class="card-text" style="color: #15566a">${texto}</p>
+                <small class="text-muted">$ 50,490.00</small> <br>
+                <small class="text-muted">Fecha de publicación: 08/09/2023 12:30 am. </small>
+                <br> <small class="text-muted">Token: a9b8c7d6e5f4321zxy987wvu654tsrqpo3210lkjhgfedcba!@#$%^&*()</small>
+                                <br>
+                <div style="color: #15566a" class="mt-2"><i class="fas fa-heart"></i>  15.3M
+                  <i class="ml-1 fas fa-comment"></i> 1.2k
+                  <i class="ml-1 fas fa-share"></i> 360
+                  <i class="ml-1 fas fa-shopping-cart"></i> 1.5k</div>
+                <img src="" class="img-fluid align-self-center">
+
+              </div>
+              <div class="btn-group">
+                
+                <button type="button" id="heartBtn" class="btn btn-sm btn-outline-danger"><i class="far fa-heart"></i></button>
+<button type="button" id="commentBtn" class="btn btn-sm btn-outline-secondary"><i class="far fa-comment"></i></button>
+<button type="button" id="shareBtn" class="btn btn-sm btn-outline-warning"><i class="fas fa-share"></i></button>
+<button type="button" id="userBtn" class="btn btn-outline-primary"><i class="fas fa-user-plus"></i></button>
+<button type="button" id="moneyBtn" class="btn btn-outline-success"><i class="fas fa-money-bill"></i></button>
+<button type="button" id="exclamationBtn" class="btn btn-sm btn-outline-dark"><i class="fas fa-exclamation-triangle"></i></button>
+    </div>
+              <div class="d-flex justify-content-between mt-3">
+               
+            </div>
+          `;
+          
+          // Agregar el contenido al segundo div (publicacion)
+          document.getElementById("publicacion").innerHTML = contenido;
+          
+          // Limpiar los campos del formulario
+          document.getElementById("titulo").value = "";
+          document.getElementById("texto").value = "";
+        });
+ 
+document.addEventListener('DOMContentLoaded', function() {
+  const heartBtn = document.getElementById('heartBtn');
+  const commentBtn = document.getElementById('commentBtn');
+  // ... otros botones ...
+
+  if(heartBtn) {
+    heartBtn.addEventListener('click', function() {
+      Swal.fire({
+        icon: 'info',
+        title: 'Botón Corazón',
+        html: '<i class="far fa-heart"></i> Has hecho clic en el botón del corazón!'
+      });
+    });
+  } else {
+    console.error('No se encontró el elemento con ID "heartBtn"');
+  }
+
+  if(commentBtn) {
+    commentBtn.addEventListener('click', function() {
+      Swal.fire({
+        icon: 'info',
+        title: 'Botón Comentario',
+        html: '<i class="far fa-comment"></i> Has hecho clic en el botón del comentario!'
+      });
+    });
+  } else {
+    console.error('No se encontró el elemento con ID "commentBtn"');
+  }
+
+  // ... repite para los demás botones ...
+});
+</script>
+<div class="col p-3 mt-2 col-md rounded-lg" style="background-color: #fcc404;">
+  <div class="text-white p-3 rounded-lg" style="background-color: #ffffff54">
+      <div class="col p-3 mb-3 col-md rounded-lg" style="background-color: white">
+          <form action="#" method="GET" class="search-form">
+              <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Subir Archivo...">
+                  <div class="input-group-append">
+                    <button class="btn btn-warning rounded" type="button" id="cargarBtn"><i class="fas fa-upload mr-2"></i>Cargar</button>
+                      <script>
+                      document.getElementById('cargarBtn').addEventListener('click', function() {
+                          Swal.fire({
+                              title: 'Cargar Archivo',
+                              html:
+                                  '<label for="swal-input1"><i class="fas fa-link mr-2"></i>Enlace:</label>' +
+                                  '<input id="swal-input1" class="swal2-input">' +
+                                  '<label for="swal-input2">Tipo:</label>' +
+                                  '<select id="swal-input2" class="swal2-input">' +
+                                  '<option value="musica">Música</option>' +
+                                  '<option value="audio">Audio</option>' +
+                                  '<option value="video">Video</option>' +
+                                  '<option value="documento">Documento</option>' +
+                                  '</select>',
+                              focusConfirm: false,
+                              preConfirm: () => {
+                                  let enlace = document.getElementById('swal-input1').value;
+                                  let tipo = document.getElementById('swal-input2').value;
+                                  // Aquí puedes manejar los valores ingresados, por ejemplo, enviarlos a tu servidor o realizar alguna otra acción
+                                  // ...
+                              }
+                          });
+                      });
+                  </script>
+                  </div>
+              </div>
+          </form>
+      </div>
+      
+      <div class="row justify-content-center">
+          <!-- Imágenes -->
+          <div class="col-sm-6 col-md-3 mt-1">
+              <!-- Añadimos el motor de búsqueda a la sección de imágenes -->
+              <form action="#" method="GET" class="mb-2">
+                  <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Buscar imágenes...">
+                      <div class="input-group-append">
+                          <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                      </div>
+                  </div>
+              </form>
+              
+              <div class="card border-0 bg-white text-center p-4">
+                <i class="fas fa-images fa-5x mb-4 text-primary"></i>
+                <h5 class="card-title mb-3" style="color: #0463cb;">Imágenes</h5>
+                <p class="card-text" style="color: #0463cb;">Ver todas las imágenes</p>
+                <div class="list-group" id="lista-conversaciones" role="tablist">
+                  <a class="list-group-item list-group-item-action active btn-outline-warning" data-toggle="list" href="" role="tab"> <i class="fas fa-images"></i> Imagen 1</a>
+                  <a class="list-group-item list-group-item-action btn-outline-warning" data-toggle="list" href="" role="tab"><i class="fas fa-images"></i> Imagen 2</a>
+                  <a class="list-group-item list-group-item-action btn-outline-warning" data-toggle="list" href="" role="tab"><i class="fas fa-images"></i> Imagen 3</a>
+               
+                </div>
+              </div>
+           
+          </div>
+          
+          <!-- Media -->
+          <div class="col-sm-6 col-md-3 mt-1">
+              <!-- Añadimos el motor de búsqueda a la sección de media -->
+              <form action="#" method="GET" class="mb-2">
+                  <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Buscar videos...">
+                      <div class="input-group-append">
+                          <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                      </div>
+                  </div>
+              </form>
+              
+              <!-- Continuación del contenido original -->
+              <div class="card border-0 bg-white text-center p-4">
+                <i class="fas fa-video fa-5x mb-4 text-primary"></i>
+                <h5 class="card-title mb-3" style="color: #0463cb;">Videos</h5>
+                <p class="card-text"style="color: #0463cb;" >Ver todos los videos</p>
+                  <div class="list-group" id="lista-conversaciones" role="tablist">
+                  <a class="list-group-item list-group-item-action active btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-video"></i> Video 1</a>
+                  <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-video"></i> Video 2</a>
+                  <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-video"></i> Video 3</a>
+                  <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-video"></i> Video 1</a>
+  
+                </div>
+              </div>
+          </div>
+          
+          <!-- Documentos -->
+          <div class="col-sm-6 col-md-3 mt-1">
+              <!-- Añadimos el motor de búsqueda a la sección de documentos -->
+              <form action="#" method="GET" class="mb-2">
+                  <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Buscar documentos...">
+                      <div class="input-group-append">
+                          <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                      </div>
+                  </div>
+              </form>
+              
+              <div class="card border-0 bg-white text-center p-4">
+                <i class="fas fa-file-alt fa-5x mb-4 text-primary"></i>
+                <h5 class="card-title mb-3" style="color: #0463cb;">Documentos</h5>
+                <p class="card-text"style="color: #0463cb;">Ver todos los documentos</p>
+                <div class="list-group" id="lista-conversaciones" role="tablist">
+                  <a class="list-group-item list-group-item-action active btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-file-alt"></i> Power Point</a>
+                  <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-file-alt"></i> Word</a>
+                  <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-file-alt"></i> Excel</a>
+                  <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-file-alt"></i> PDF</a>
+  
+                </div>
+              </div>
+
+          </div>
+          
+          <!-- Música -->
+          <div class="col-sm-6 col-md-3 mt-1">
+              <!-- Añadimos el motor de búsqueda a la nueva sección de música -->
+              <form action="#" method="GET" class="mb-2">
+                  <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Buscar música...">
+                      <div class="input-group-append">
+                          <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                      </div>
+                  </div>
+              </form>
+              
+              <!-- Contenido de la nueva sección de música -->
+              <div class="card border-0 bg-white text-center p-4">
+                  <i class="fas fa-music fa-5x mb-4 text-primary"></i>
+                  <h5 class="card-title mb-3" style="color: #0463cb;">Música</h5>
+                  <p class="card-text" style="color: #0463cb;">Ver toda la música</p>
+                  <div class="list-group" role="tablist">
+                      <a class="list-group-item list-group-item-action active btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-music"></i> Canción 1</a>
+                      <a class="list-group-item list-group-item-action btn-outline-primary" data-toggle="list" href="" role="tab"><i class="fas fa-music"></i> Canción 2</a>
+                      ...
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+            <style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+h1,h2,h3,h4,h5,h6,p{
+  font-family: 'Orbitron', sans-serif;
+}
+
+              #Navbar {
+  display: flex; /* Agregar estilo flex */
+  flex-direction: column; /* Cambiar la dirección de flex a columna */
+}
+
+.navbar-nav {
+  margin-top: auto; /* Mover la barra de navegación al final del contenedor */
+  margin-bottom: 0; /* Eliminar el margen inferior */
+}
+#qrcode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh; /* Ajusta la altura según tus necesidades */
+}
+
+#qrcode img {
+  max-width: 100%;
+  max-height: 100%;
+}
+              .p
+              {
+                color: #15566a;
+              }
+              .rotating-human {
+                width: 200px;
+                height: 200px;
+                position: relative;
+                perspective: 800px;
+              }
+              
+              .human {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                transform-style: preserve-3d;
+                animation: rotate 10s infinite linear;
+              }
+              
+              @keyframes rotate {
+                0% {
+                  transform: rotateY(0deg);
+                }
+                100% {
+                  transform: rotateY(360deg);
+                }
+              }
+            </style>
+
+         
+             <script>
+              // Variable para almacenar el saldo actual
+              let balance = 100;
+          
+              // Función para enviar HumanCoin
+              function sendHumanCoin() {
+                const recipient = document.getElementById('recipient').value;
+                const amount = parseInt(document.getElementById('amount').value);
+          
+                // Verificar que la cantidad no sea negativa y haya saldo suficiente
+                if (amount > 0 && amount <= balance) {
+                  // Aquí se realizaría la lógica real para enviar la criptomoneda al destinatario
+                  // Por simplicidad, solo actualizaremos el saldo en este ejemplo
+                  balance -= amount;
+          
+                  // Actualizar el saldo mostrado en la página
+                  document.getElementById('balance').textContent = balance + ' HMC';
+          
+                  // Mostrar mensaje de éxito
+                  alert('¡HumanCoin enviado con éxito!');
+                } else {
+                  // Mostrar mensaje de error si la cantidad es incorrecta o no hay suficiente saldo
+                  alert('Cantidad incorrecta o saldo insuficiente');
+                }
+              }
+            </script>
+                
+            <div class="text-white mt-3 p-3  rounded-lg" style="background-color: rgba(245, 245, 245, 0.313)">
+              <form action="verification" method="POST">
+              <div class="pb-2">
+                <h4 class="mb-2" style="color: black;">Validación digital</h4>
+              </div>
+            <h6 class="mb-4 fw-normal" style="color: black;">Ingresa el numero identificador:</h6>
+            <div class="mb-3 fw-normal">
+          
+            <input type="" name="tarjeta_chip" class="form-control" id="floatingInput" placeholder="XXXX-XXXX-XXXX-XXXX" length="16">
+            </div>
+            <button type="submit" class="btn btn-secondary"><i class=" fas fa-search mr-2"></i>Validar</button>
+           <button type="submit" class="ml-2 btn btn-dark"><i class="mr-2 fas fa-qrcode"></i>Escanear</button>
+           <button type="submit" class="ml-2 btn btn-warning"><i class=" fas fa-exclamation-triangle"></i></button>                    
+          </form>   
+          </div>
+
+          <div class="rounded-lg mt-3" style="background-color: white; padding: 20px; ">
+            <h2 class="mb-3" style="color: #F17460;">Estadisticos  <i class="fas fa-chart-bar ml-2"></i></h2>
+            <form action="#" method="GET" class="mb-3">
+              <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Buscar estadistica...">
+                  <div class="input-group-append">
+                      <button class="btn btn-outline-danger" type="submit"><i class="fas fa-search"></i></button>
+                  </div>
+              </div>
+          </form>
+            <div style="display: flex; justify-content: space-between;">
+              <div style="background-color: whitesmoke; padding: 20px; width: 30%;">
+                <h3 style="color: #F17460;">Gráfica 1</h3>
+                <p style="color: #F17460;">Descripción de la Gráfica 1</p>
+                <img src="ruta/grafica1.png" alt="Gráfica 1">
+                <button type="button" class="btn btn-info mt-2" onclick="compartirGrafica('Gráfica 1')"><i class="fas fa-share-alt"></i>
+                </button>
+                <button type="button" class="btn btn-danger mt-2" onclick="quitarGrafica('Gráfica 1')"><i class="fas fa-trash-alt"></i>
+                </button>
+            </div>  
+              
+              <div style="background-color: whitesmoke; padding: 20px; width: 30%;">
+                <h3 style="color: #F17460;">Gráfica 2</h3>
+                <p style="color: #F17460;">Descripción de la Gráfica 2</p>
+                <img src="ruta/grafica2.png" alt="Gráfica 2">
+                <button type="button" class="btn btn-info mt-2" onclick="compartirGrafica('Gráfica 2')"><i class="fas fa-share-alt"></i>
+                </button>
+                <button type="button" class="btn btn-danger mt-2" onclick="quitarGrafica('Gráfica ')"><i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+              
+              <div style="background-color: whitesmoke; padding: 20px; width: 30%;">
+                <h3 style="color: #F17460;">Gráfica 3</h3>
+                <p style="color: #F17460;">Descripción de la Gráfica 3</p>
+                <img src="ruta/grafica3.png" alt="Gráfica 3">
+                 <button type="button" class="btn btn-info mt-2" onclick="compartirGrafica('Gráfica 3')"><i class="fas fa-share-alt"></i>
+                </button>
+                <button type="button" class="btn btn-danger mt-2" onclick="quitarGrafica('Gráfica 3')"><i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            </div>
+           
+          </div>
+          
+<script>
+  function compartirGrafica(nombreGrafica) {
+      Swal.fire({
+          icon: 'success',
+          title: '¡Gráfica Compartida!',
+          text: `Has compartido la ${nombreGrafica} exitosamente`,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: '¡Genial!'
+      });
+  }
+
+  function quitarGrafica(nombreGrafica) {
+      Swal.fire({
+          icon: 'info',
+          title: 'Gráfica Quitada',
+          text: `Has quitado la ${nombreGrafica} exitosamente`,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Entendido'
+      });
+  }
+</script>
+          <div id="eventos" class="text-center rounded-lg mt-2 mb-2" style="background-color: #15566a">
+            <div class="container mb-3 pb-1">
+              <div class="row">
+                <div class="col-md-6 mt-3">
+                  <div class="text-white mt-3 p-2 rounded-lg" style="background-color: #ffffff54">
+                    <div class="list-group" id="lista-conversaciones" role="tablist">
+                      <h6>Próximos eventos <i class="fas fa-calendar-alt"></i></h5>
+                        <form action="#" method="GET" class="mb-3">
+                          <div class="input-group">
+                              <input type="text" class="form-control" placeholder="Buscar eventos...">
+                              <div class="input-group-append">
+                                  <button class="btn btn-outline-info" type="submit"><i class="fas fa-search"></i></button>
+                              </div>
+                          </div>
+                      </form>
+                      <div class="list-group" id="lista-conversaciones" role="tablist">
+                        <a class="list-group-item list-group-item-action active btn-outline-info" data-toggle="list" href="" role="tab">Evento 1</a>
+                        <a class="list-group-item list-group-item-action btn-outline-info" data-toggle="list" href="" role="tab">Evento 2</a>
+                        <a class="list-group-item list-group-item-action btn-outline-info" data-toggle="list" href="" role="tab">Evento 3 </a>
+                        <a class="list-group-item list-group-item-action btn-outline-info" data-toggle="list" href="" role="tab">Evento 4</a>
+                        <a class="list-group-item list-group-item-action btn-outline-info" data-toggle="list" href="" role="tab">Evento 5</a>
+                      </div>
+                    </div>
+                  </div>
+              
+                </div>
+                <div class="col-md-6 mt-3">
+                  <form action="#" method="POST">
+                    <div class="form-group">
+                      <label for="nombreEvento">Nombre del evento:</label>
+                      <input type="text" class="form-control" id="nombreEvento" name="nombreEvento">
+                    </div>
+                    <div class="form-group">
+                      <label for="fechaEvento">Fecha del evento:</label>
+                      <input type="date" class="form-control" id="fechaEvento" name="fechaEvento">
+                    </div>
+                    <div class="form-group">
+                      <label for="horaEvento">Hora del evento:</label>
+                      <input type="time" class="form-control" id="horaEvento" name="horaEvento">
+                    </div>
+                    <button type="button" class="btn btn-info" id="agendarBtn"><i class="fas fa-calendar mr-1"></i>Agendar</button>
+                    <!-- ... Resto de tu código HTML ... -->
+                  <script>
+                    document.getElementById('agendarBtn').addEventListener('click', function() {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Evento Agendado!',
+                            text: 'Hemos agendado tu evento',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: '¡Genial!'
+                        });
+                    });
+                </script>
+      
+                
+                
+                
+<button type="button" class="btn btn-info ml-2" id="addFriendBtnn"><i class="fas fa-user-plus mr-2"></i></button>
+<button type="button" class="btn btn-info ml-2" id="addVideoCallBtn"><i class="fas fa-video mr-2"></i></button>
+
+<!-- ... -->
+
+<script>
+    document.getElementById('addFriendBtnn').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Agregar amigo',
+            html: '<input id="swal-input1" class="swal2-input" placeholder="Buscar amigo...">',
+            focusConfirm: false,
+            preConfirm: () => {
+                let friendName = document.getElementById('swal-input1').value;
+                // Aquí puedes manejar el valor ingresado, por ejemplo, enviarlo a tu servidor o buscar en la lista de amigos
+                // ...
+            }
+        });
+    });
+
+    document.getElementById('addVideoCallBtn').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Agregar Video Llamada',
+            html:
+                '<label for="swal-input2">Enlace de la video llamada:</label>' +
+                '<input id="swal-input2" class="swal2-input">' +
+                '<label for="swal-input3">Fecha de la video llamada:</label>' +
+                '<input type="date" id="swal-input3" class="swal2-input">' +
+                '<label for="swal-input4">Hora de la video llamada:</label>' +
+                '<input type="time" id="swal-input4" class="swal2-input">',
+            focusConfirm: false,
+            preConfirm: () => {
+                let videoLink = document.getElementById('swal-input2').value;
+                let videoDate = document.getElementById('swal-input3').value;
+                let videoTime = document.getElementById('swal-input4').value;
+                // Aquí puedes manejar los valores ingresados, por ejemplo, enviarlos a tu servidor o programar la videollamada
+                // ...
+            }
+        });
+    });
+</script>
+ 
+                  </form>
+                </div>
+              </div>
+              
+                <div class="text-center align-items-center m-3 p-2 rounded-lg" style="background-color: #ffffff54">
+                  <h4 class="mt-2">Calendario</h4>
+                 <div class="" ALIGN="middle">  <table class="table table-bordered" style="width:auto">
+                      <thead>
+                        <tr>
+                          <th>D</th>
+                          <th>L</th>
+                          <th>M</th>
+                          <th>M</th>
+                          <th>J</th>
+                          <th>V</th>
+                          <th>S</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>1</td>
+                          <td>2</td>
+                          <td>3</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>5</td>
+                          <td>6</td>
+                          <td>7</td>
+                          <td>8</td>
+                          <td>9</td>
+                          <td>10</td>
+                        </tr>
+                        <!-- Resto del calendario -->
+                      </tbody>
+                    </table>
+                  </div>
+                  <button type="button" class="ml-2 btn btn-info" id="estadoCuentaBtn"><i class="mr-2 fas fa-file-alt"></i>Estado</button>
+                  <script>
+                    document.getElementById('estadoCuentaBtn').addEventListener('click', function() {
+                        Swal.fire({
+                            icon: 'success', // Para mostrar una paloma verde
+                            title: '¡Todo en orden!',
+                            text: 'Este es tu estado de cuenta',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Entendido'
+                        });
+                    });
+                </script>
+                </div>
+            </div>
+            </div>
+          
+              </div>
+              
+              </div>
+              
+          
+              
+
+  </div>    
+ 
+ 
+</div>
+          <% if (typeof alert != "undefined")  { %>
+            <script>
+            Swal.fire({
+              title: 'Código QR',
+              imageUrl: qrCodeImage,
+              imageAlt: 'Código QR',
+              confirmButtonText: 'Cerrar'
+            });
+          });
+        </script>
+            <script>
+          Swal.fire({
+            title:'<%= alertTitle %>',
+            text:'<%= alertMessage %>',
+            icon:'<%= iconHtml %>',
+            showConfirmButton: <%= showConfirmButton %>,
+            timer: <%= timer %>
+          }).then(()=>{ 	
+            window.location='/<%= ruta %>'
+          })
+          </script>
+        <% } %>
+
+      <!-- Asegúrate de tener un botón para transferir fondos en tu HTML -->
+<button onclick="transferirFondos()">Transferir Fondos</button>
+
+<script>
+async function transferirFondos() {
+    try {
+        let amount = document.getElementById('amount').value; // Asegúrate de tener un input con id 'amount'
+        let response = await fetch('tu_endpoint_del_servidor', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ amount: amount })
+        });
+
+        let result = await response.json();
+
+        if(result.success) {
+            alert('Transferencia realizada con éxito!');
+        } else {
+            alert('Hubo un error al realizar la transferencia');
+        }
+
+    } catch(error) {
+        console.error('Error al realizar la transferencia', error);
+    }
+}
+</script>
+
+ 
+  <!-- Pie de pagina -->
+
+  <div style="color: #2d7990; text-align: center;" class="mt-3" style="background-color: white;">
+    <a class="" href="#">
+      <img class="mb-2" src="https://i.ibb.co/f4vZNKd/Captura-de-pantalla-2023-04-29-201016.png" width="80" height="80" alt="Logo">		
+    </a>
+    <p class="m-0 pb-2"> Programador Sergio Campos Medina. <br> Registro de obra No.03-2022-050214132600-01<br>  &copy; 2022-2027</p>
+    
+  </div>
+
+  <!-- Scripts --> 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+  crossorigin="anonymous"></script>
+  </body>
+  </html>
