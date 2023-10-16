@@ -10,13 +10,13 @@ services:
       service:
         name: human-system-service
         description: Human System Service
+        role: 'acs:ram::5963997423258469:role/aliyunfcdefaultrole'
         internetAccess: true
-        role: 'acs:ram::5963997423258469:role/AliyunFcDefaultRole'
         tracingConfig: Enable
       function:
         name: human-system-function
         description: 'Human System Web Application'
-        codeUri: './views'  # Esto asume que s.yaml está en la raíz de tu proyecto
+        codeUri: '.'  # Esto asume que s.yaml está en la raíz de tu proyecto
         handler: 'app.handler'
         memorySize: 512
         runtime: nodejs12
