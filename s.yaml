@@ -13,9 +13,11 @@ services:
         internetAccess: true
         role: 'acs:ram::5963997423258469:role/AliyunFcDefaultRole'
         tracingConfig: Enable
-      function:
+        function:
         name: human-system-function
         description: 'Human System API Function'
+        codeUri: './'  # Suponiendo que todo el directorio necesita ser subido
+        handler: 'app.handler'  # Esto debe configurarse correctamente según tu configuración
         memorySize: 512
         runtime: nodejs12
         timeout: 30
